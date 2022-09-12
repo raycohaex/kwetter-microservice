@@ -1,6 +1,7 @@
-﻿using MassTransit.Mediator;
+﻿using Kweet.Application.Features.Queries.GetKweet;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
+using MediatR;
 
 namespace Kweet.API.Controllers
 {
@@ -16,12 +17,12 @@ namespace Kweet.API.Controllers
         }
 
         [HttpGet("{tweetId}", Name = "GetTweet")]
-        [ProducesResponseType(typeof(IEnumerable<OrdersVm>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<OrdersVm>>> GetOrdersByUserName(string userName)
+        [ProducesResponseType(typeof(IEnumerable<KweetViewModel>), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<IEnumerable<KweetViewModel>>> GetOrdersByUserName(Guid id)
         {
-            var query = new GetOrdersListQuery(userName);
-            var orders = await _mediator.Send(query);
-            return Ok(orders);
+            var query = new GetKweetQuery(id);
+            var kweet = await _mediator.Send(query);
+            return Ok(kweet);
         }
     }
 }
