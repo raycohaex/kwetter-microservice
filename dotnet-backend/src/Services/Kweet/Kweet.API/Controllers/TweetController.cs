@@ -18,9 +18,9 @@ namespace Kweet.API.Controllers
 
         [HttpGet("{tweetId}", Name = "GetTweet")]
         [ProducesResponseType(typeof(IEnumerable<KweetViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<KweetViewModel>>> GetOrdersByUserName(Guid id)
+        public async Task<ActionResult<IEnumerable<KweetViewModel>>> GetOrdersByUserName(Guid tweetId)
         {
-            var query = new GetKweetQuery(id);
+            var query = new GetKweetQuery(tweetId);
             var kweet = await _mediator.Send(query);
             return Ok(kweet);
         }
