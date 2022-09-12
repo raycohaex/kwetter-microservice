@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Domain", "Kweet.Domai
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Infrastructure", "Kweet.Infrastructure\Kweet.Infrastructure.csproj", "{CA540A1A-7DBC-4B97-8424-2E98515AA0AA}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13588125-25F2-4DDB-90B5-B8DBF6024BD2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{CA540A1A-7DBC-4B97-8424-2E98515AA0AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CA540A1A-7DBC-4B97-8424-2E98515AA0AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CA540A1A-7DBC-4B97-8424-2E98515AA0AA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13588125-25F2-4DDB-90B5-B8DBF6024BD2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13588125-25F2-4DDB-90B5-B8DBF6024BD2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13588125-25F2-4DDB-90B5-B8DBF6024BD2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13588125-25F2-4DDB-90B5-B8DBF6024BD2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

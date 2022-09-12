@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  db.kweet:
+    image: mysql
+
+  api.kweet:
+    image: ${DOCKER_REGISTRY-}kweetapi
+    build:
+      context: .
+      dockerfile: src/Services/Kweet/Kweet.API/Dockerfile
+
+volumes:
+  mysql_data:

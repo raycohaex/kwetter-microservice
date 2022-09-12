@@ -1,0 +1,25 @@
+version: '3.4'
+
+services:
+  api.kweet:
+    container_name: api.kweet
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "ConnectionStrings:KweetDbConnectionString=server=db.kweet;database=KweetDb;user=development;password=development"
+    depends_on:
+        - db.kweet
+    ports:
+        - "8000:80"
+
+  db.kweet:
+    container_name: db.kweet
+    environment:
+        MYSQL_ROOT_PASSWORD: "development"
+        MYSQL_USER: "development"
+        MYSQL_PASSWORD: "development"
+        MYSQL_DATABASE: "KweetDb"
+    restart: always
+    ports:
+        - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
