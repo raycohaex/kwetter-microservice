@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Kweet.Application.Features.Commands.PostKweet
 {
-    internal class PostKweetCommandHandler : IRequestHandler<PostKweetCommand, Guid>
+    public class PostKweetCommandHandler : IRequestHandler<PostKweetCommand, Guid>
     {
         private readonly IKweetRepository _kweetRepository;
         private readonly IMapper _mapper;
@@ -27,6 +27,10 @@ namespace Kweet.Application.Features.Commands.PostKweet
         public async Task<Guid> Handle(PostKweetCommand request, CancellationToken cancellationToken)
         {
             var kweetEntity = _mapper.Map<KweetEntity>(request);
+            // TODO: replace with user ID
+            kweetEntity.CreatedBy = "TO_BE_IMPLEMENTED";
+            kweetEntity.CreatedOn = DateTime.Now;
+
             var newKweet = await _kweetRepository.AddAsync(kweetEntity);
 
             return newKweet.Id;

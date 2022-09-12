@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Kweet.Application.Features.Commands.PostKweet;
+using Kweet.Application.Features.Queries.GetKweet;
 using Kweet.Domain.Entities;
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,8 @@ namespace Kweet.Application.Mapping
     {
         public MappingProfile()
         {
-            // CreateMap<KweetEntity, KweetVm>().ReverseMap();
+            CreateMap<KweetEntity, KweetViewModel>().ReverseMap();
+            CreateMap<KweetEntity, PostKweetCommand>().ReverseMap();
         }
     }
 }

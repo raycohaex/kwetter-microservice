@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Kweet.Application.Features.Commands.PostKweet
 {
-    internal class PostKweetCommand: IRequest<Guid>
+    public class PostKweetCommand: IRequest<Guid>
     {
         public string UserName { get; set; }
         public string TweetBody { get; set; }

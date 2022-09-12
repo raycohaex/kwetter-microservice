@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 using MediatR;
+using Kweet.Domain.Entities;
+using Kweet.Application.Features.Commands.PostKweet;
 
 namespace Kweet.API.Controllers
 {
@@ -23,6 +25,14 @@ namespace Kweet.API.Controllers
             var query = new GetKweetQuery(tweetId);
             var kweet = await _mediator.Send(query);
             return Ok(kweet);
+        }
+
+        [HttpPost]
+        [ProducesResponseType((int)HttpStatusCode.OK)]
+        public async Task<ActionResult<Guid>> PostKweet([FromBody] PostKweetCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return Ok(result);
         }
     }
 }
