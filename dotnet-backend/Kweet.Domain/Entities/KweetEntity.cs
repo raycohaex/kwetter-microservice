@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Kweet.Domain.Entities
 {
-    public class Kweet : EntityBase
+    public class KweetEntity : EntityBase
     {
         public string UserName { get; set; }
-        public string TweetBody
+        public string TweetBody { get; set; }
     }
 }

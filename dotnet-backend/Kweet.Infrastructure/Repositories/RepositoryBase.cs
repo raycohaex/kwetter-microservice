@@ -1,6 +1,11 @@
-﻿using System;
+﻿using Kweet.Application.Contracts.Persistence;
+using Kweet.Domain.Common;
+using Kweet.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -8,9 +13,9 @@ namespace Kweet.Infrastructure.Repositories
 {
     public class RepositoryBase<T> : IAsyncRepository<T> where T : EntityBase
     {
-        protected readonly OrderContext _dbContext;
+        protected readonly KweetContext _dbContext;
 
-        public RepositoryBase(OrderContext dbContext)
+        public RepositoryBase(KweetContext dbContext)
         {
             _dbContext = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
         }
