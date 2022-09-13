@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace UserTimeline.Application.Features.Queries.GetTimeline
 {
-    public class UpdateTimelineQuery : IRequest<TimelineViewModel>
+    public class GetTimelineQuery : IRequest<TimelineViewModel>
     {
         public string Username { get; set; }
 
-        public UpdateTimelineQuery(string username)
+        public GetTimelineQuery(string username)
         {
             Username = username;
         }

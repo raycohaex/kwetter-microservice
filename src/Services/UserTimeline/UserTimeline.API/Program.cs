@@ -1,4 +1,5 @@
 using Microsoft.OpenApi.Models;
+using UserTimeline.Application;
 using UserTimeline.Application.Contracts.Persistence;
 using UserTimeline.Infrastructure.Repositories;
 
@@ -14,6 +15,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
 });
+
+builder.Services.AddApplicationServices();
 
 builder.Services.AddSwaggerGen(options => {
         options.SwaggerDoc("v1", new OpenApiInfo { Title = "User timeline API", Version = "v1",
