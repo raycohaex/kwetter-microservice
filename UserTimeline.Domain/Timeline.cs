@@ -1,4 +1,4 @@
-﻿namespace UserTimeline.Infrastructure
+﻿namespace UserTimeline.Domain
 {
     public class Timeline
     {

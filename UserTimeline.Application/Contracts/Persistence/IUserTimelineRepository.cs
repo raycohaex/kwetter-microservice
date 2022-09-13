@@ -1,4 +1,6 @@
-﻿namespace UserTimeline.Infrastructure.Repositories
+﻿using UserTimeline.Domain;
+
+namespace UserTimeline.Application.Contracts.Persistence
 {
     public interface IUserTimelineRepository
     {
