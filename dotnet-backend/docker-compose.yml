@@ -4,6 +4,9 @@ services:
   db.kweet:
     image: mysql
 
+  db.usertimeline:
+    image: redis:alpine
+
   api.kweet:
     image: ${DOCKER_REGISTRY-}kweetapi
     build:
