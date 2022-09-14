@@ -6,10 +6,23 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:KweetDbConnectionString=server=db.kweet;database=KweetDb;user=development;password=development"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
     depends_on:
         - db.kweet
     ports:
         - "8000:80"
+
+  api.usertimeline:
+    container_name: api.usertimeline
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=db.usertimeline:6379"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@rabbitmq:5672"
+    depends_on:
+      - db.usertimeline
+      - service.rabbitmq
+    ports:
+      - "8001:80"
 
   db.kweet:
     container_name: db.kweet
@@ -29,3 +42,11 @@ services:
     restart: always
     ports:
       - "6379:6379"
+
+
+  service.rabbitmq:
+    container_name: "service.rabbitmq"
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"

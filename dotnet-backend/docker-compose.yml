@@ -7,11 +7,20 @@ services:
   db.usertimeline:
     image: redis:alpine
 
+  service.rabbitmq:
+    image: rabbitmq:3-management-alpine
+
   api.kweet:
     image: ${DOCKER_REGISTRY-}kweetapi
     build:
       context: .
       dockerfile: src/Services/Kweet/Kweet.API/Dockerfile
+
+  api.usertimeline:
+    image: ${DOCKER_REGISTRY-}usertimelineapi
+    build:
+      context: .
+      dockerfile: src/Services/UserTimeline/UserTimeline.API/Dockerfile
 
 volumes:
   mysql_data:

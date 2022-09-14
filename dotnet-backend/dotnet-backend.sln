@@ -11,21 +11,25 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UserTimeline", "UserTimelin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.API", "src\Services\Kweet\Kweet.API\Kweet.API.csproj", "{4F03997D-3831-496D-AEDA-7529E9674896}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Application", "Kweet.Application\Kweet.Application.csproj", "{D1A6E0E8-07E5-4198-9BE9-758B3939FB26}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Application", "src\Services\Kweet\Kweet.Application\Kweet.Application.csproj", "{D1A6E0E8-07E5-4198-9BE9-758B3939FB26}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Domain", "Kweet.Domain\Kweet.Domain.csproj", "{403D920E-3880-4A9A-B9BD-823BAA8FB0FD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Domain", "src\Services\Kweet\Kweet.Domain\Kweet.Domain.csproj", "{403D920E-3880-4A9A-B9BD-823BAA8FB0FD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Infrastructure", "Kweet.Infrastructure\Kweet.Infrastructure.csproj", "{CA540A1A-7DBC-4B97-8424-2E98515AA0AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Infrastructure", "src\Services\Kweet\Kweet.Infrastructure\Kweet.Infrastructure.csproj", "{CA540A1A-7DBC-4B97-8424-2E98515AA0AA}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{13588125-25F2-4DDB-90B5-B8DBF6024BD2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTimeline.API", "..\src\Services\UserTimeline\UserTimeline.API\UserTimeline.API.csproj", "{2EB74885-495C-4847-A729-1B14A17C8756}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTimeline.API", "src\Services\UserTimeline\UserTimeline.API\UserTimeline.API.csproj", "{2EB74885-495C-4847-A729-1B14A17C8756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTimeline.Application", "..\UserTimeline.Application\UserTimeline.Application.csproj", "{CADEE1DE-0C5E-4FB0-A1D3-1A842BF86270}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTimeline.Application", "src\Services\UserTimeline\UserTimeline.Application\UserTimeline.Application.csproj", "{CADEE1DE-0C5E-4FB0-A1D3-1A842BF86270}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTimeline.Domain", "..\UserTimeline.Domain\UserTimeline.Domain.csproj", "{697A685C-6AA7-4230-966D-79C13A0BD595}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTimeline.Domain", "src\Services\UserTimeline\UserTimeline.Domain\UserTimeline.Domain.csproj", "{697A685C-6AA7-4230-966D-79C13A0BD595}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserTimeline.Infrastructure", "..\UserTimeline.Infrastructure\UserTimeline.Infrastructure.csproj", "{E3B1ADFF-2255-4DFC-AA52-E7B7CA9CF16C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UserTimeline.Infrastructure", "src\Services\UserTimeline\UserTimeline.Infrastructure\UserTimeline.Infrastructure.csproj", "{E3B1ADFF-2255-4DFC-AA52-E7B7CA9CF16C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BuildingBlocks", "BuildingBlocks", "{64393D2A-806E-4531-A479-D4E24BB4A97B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Eventbus.Messages", "src\BuildingBlocks\Eventbus.Messages\Eventbus.Messages.csproj", "{13097A60-B60A-4235-A8A7-873A7FB46B12}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,10 @@ Global
 		{E3B1ADFF-2255-4DFC-AA52-E7B7CA9CF16C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3B1ADFF-2255-4DFC-AA52-E7B7CA9CF16C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3B1ADFF-2255-4DFC-AA52-E7B7CA9CF16C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13097A60-B60A-4235-A8A7-873A7FB46B12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13097A60-B60A-4235-A8A7-873A7FB46B12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13097A60-B60A-4235-A8A7-873A7FB46B12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13097A60-B60A-4235-A8A7-873A7FB46B12}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -84,6 +92,7 @@ Global
 		{CADEE1DE-0C5E-4FB0-A1D3-1A842BF86270} = {E8611E7C-0815-49E0-8B73-38AC9EC229F0}
 		{697A685C-6AA7-4230-966D-79C13A0BD595} = {E8611E7C-0815-49E0-8B73-38AC9EC229F0}
 		{E3B1ADFF-2255-4DFC-AA52-E7B7CA9CF16C} = {E8611E7C-0815-49E0-8B73-38AC9EC229F0}
+		{13097A60-B60A-4235-A8A7-873A7FB46B12} = {64393D2A-806E-4531-A479-D4E24BB4A97B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {453852FF-C494-4E5E-844B-14EA98ED9CB6}

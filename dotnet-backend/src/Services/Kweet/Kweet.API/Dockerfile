@@ -7,9 +7,9 @@ EXPOSE 80
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["src/Services/Kweet/Kweet.API/Kweet.API.csproj", "src/Services/Kweet/Kweet.API/"]
-COPY ["Kweet.Application/Kweet.Application.csproj", "Kweet.Application/"]
-COPY ["Kweet.Domain/Kweet.Domain.csproj", "Kweet.Domain/"]
-COPY ["Kweet.Infrastructure/Kweet.Infrastructure.csproj", "Kweet.Infrastructure/"]
+COPY ["src/Services/Kweet/Kweet.Application/Kweet.Application.csproj", "src/Services/Kweet/Kweet.Application/"]
+COPY ["src/Services/Kweet/Kweet.Domain/Kweet.Domain.csproj", "src/Services/Kweet/Kweet.Domain/"]
+COPY ["src/Services/Kweet/Kweet.Infrastructure/Kweet.Infrastructure.csproj", "src/Services/Kweet/Kweet.Infrastructure/"]
 RUN dotnet restore "src/Services/Kweet/Kweet.API/Kweet.API.csproj"
 COPY . .
 WORKDIR "/src/src/Services/Kweet/Kweet.API"
