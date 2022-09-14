@@ -28,10 +28,10 @@ namespace UserTimeline.Application.Features.Commands.UpdateTimeline
 
             if (timelineToUpdate == null)
             {
-                // TODO: Custom exception.
+                timelineToUpdate = new Timeline(request.UserName);
             }
 
-            _mapper.Map(request, timelineToUpdate, typeof(UpdateTimelineCommand), typeof(KweetEntity));
+            _mapper.Map(request, timelineToUpdate, typeof(UpdateTimelineCommand), typeof(Timeline));
 
             await _kweetRepository.UpdateTimeline(timelineToUpdate);
 
