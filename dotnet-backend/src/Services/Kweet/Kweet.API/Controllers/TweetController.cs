@@ -4,6 +4,9 @@ using System.Net;
 using MediatR;
 using Kweet.Domain.Entities;
 using Kweet.Application.Features.Commands.PostKweet;
+using Eventbus.Messages.Events;
+using AutoMapper;
+using MassTransit;
 
 namespace Kweet.API.Controllers
 {
@@ -12,15 +15,19 @@ namespace Kweet.API.Controllers
     public class TweetController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+        private readonly IPublishEndpoint _publish;
 
-        public TweetController(IMediator mediator)
+        public TweetController(IMediator mediator, IMapper mapper, IPublishEndpoint publish)
         {
+            _mapper = mapper;
             _mediator = mediator;
+            _publish = publish;
         }
 
-        [HttpGet("{tweetId}", Name = "GetTweet")]
-        [ProducesResponseType(typeof(IEnumerable<KweetViewModel>), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<IEnumerable<KweetViewModel>>> GetOrdersByUserName(Guid tweetId)
+        [HttpGet("{tweetId}", Name = "GetKweet")]
+        [ProducesResponseType(typeof(KweetViewModel), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult<KweetViewModel>> GetKweetById(Guid tweetId)
         {
             var query = new GetKweetQuery(tweetId);
             var kweet = await _mediator.Send(query);
@@ -32,6 +39,10 @@ namespace Kweet.API.Controllers
         public async Task<ActionResult<Guid>> PostKweet([FromBody] PostKweetCommand command)
         {
             var result = await _mediator.Send(command);
+
+            var eventMessage = _mapper.Map<KweetPostedEvent>(result);
+            await _publish.Publish(eventMessage);
+
             return Ok(result);
         }
     }

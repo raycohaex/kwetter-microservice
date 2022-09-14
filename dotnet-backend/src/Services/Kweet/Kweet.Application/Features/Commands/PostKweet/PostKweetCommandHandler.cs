@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Kweet.Application.Features.Commands.PostKweet
 {
-    public class PostKweetCommandHandler : IRequestHandler<PostKweetCommand, Guid>
+    public class PostKweetCommandHandler : IRequestHandler<PostKweetCommand, KweetEntity>
     {
         private readonly IKweetRepository _kweetRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace Kweet.Application.Features.Commands.PostKweet
             _logger = logger;
         }
 
-        public async Task<Guid> Handle(PostKweetCommand request, CancellationToken cancellationToken)
+        public async Task<KweetEntity> Handle(PostKweetCommand request, CancellationToken cancellationToken)
         {
             var kweetEntity = _mapper.Map<KweetEntity>(request);
             // TODO: replace with user ID
@@ -33,7 +33,7 @@ namespace Kweet.Application.Features.Commands.PostKweet
 
             var newKweet = await _kweetRepository.AddAsync(kweetEntity);
 
-            return newKweet.Id;
+            return newKweet;
         }
     }
 }
