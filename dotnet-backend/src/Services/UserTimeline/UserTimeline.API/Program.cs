@@ -1,4 +1,8 @@
+using Eventbus.Messages.Common;
+using Eventbus.Messages.Events;
+using MassTransit;
 using Microsoft.OpenApi.Models;
+using UserTimeline.API.EventBusConsumers;
 using UserTimeline.Application;
 using UserTimeline.Application.Contracts.Persistence;
 using UserTimeline.Infrastructure.Repositories;
@@ -17,6 +21,20 @@ builder.Services.AddStackExchangeRedisCache(options =>
 });
 
 builder.Services.AddApplicationServices();
+
+builder.Services.AddMassTransit(config =>
+{
+    config.AddConsumer<KweetPostedConsumer>();
+
+    config.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+        cfg.ReceiveEndpoint(EventBusConstants.KweetPostedQueue, c =>
+        {
+            c.ConfigureConsumer<KweetPostedConsumer>(ctx);
+        });
+    });
+});
 
 builder.Services.AddSwaggerGen(options => {
         options.SwaggerDoc("v1", new OpenApiInfo { Title = "User timeline API", Version = "v1",

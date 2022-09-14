@@ -8,6 +8,7 @@ namespace Eventbus.Messages.Events
 {
     public class IntegrationBaseEvent
     {
+        // Base information for my MQ event
         public IntegrationBaseEvent()
         {
             EventId = Guid.NewGuid();

@@ -40,6 +40,8 @@ namespace Kweet.API.Controllers
         {
             var result = await _mediator.Send(command);
 
+            // The post command returns an entity,
+            // I map it to an event and send it to MQ
             var eventMessage = _mapper.Map<KweetPostedEvent>(result);
             await _publish.Publish(eventMessage);
 

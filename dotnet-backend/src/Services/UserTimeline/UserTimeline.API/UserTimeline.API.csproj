@@ -10,12 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="MassTransit" Version="8.0.6" />
+    <PackageReference Include="MassTransit.AspNetCore" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.0.6" />
     <PackageReference Include="Microsoft.Extensions.Caching.StackExchangeRedis" Version="6.0.9" />
     <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.17.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.2.3" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\BuildingBlocks\Eventbus.Messages\Eventbus.Messages.csproj" />
     <ProjectReference Include="..\..\Kweet\Kweet.Application\Kweet.Application.csproj" />
     <ProjectReference Include="..\UserTimeline.Application\UserTimeline.Application.csproj" />
     <ProjectReference Include="..\UserTimeline.Infrastructure\UserTimeline.Infrastructure.csproj" />
