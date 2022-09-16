@@ -2,6 +2,7 @@
 using Eventbus.Messages.Events;
 using UserTimeline.API.EventBusConsumers;
 using UserTimeline.Application.Features.Commands.UpdateTimeline;
+using UserTimeline.Application.Features.Queries.GetTimeline;
 using UserTimeline.Domain;
 
 namespace UserTimeline.API.Mapper
@@ -11,7 +12,7 @@ namespace UserTimeline.API.Mapper
         public UserTimelineProfile()
         {
             CreateMap<KweetEntity, KweetPostedEvent>().ReverseMap();
-            CreateMap<UpdateTimelineCommand, KweetEntity>().ReverseMap();
+            CreateMap<UpdateTimelineCommand, TimelineViewModel>().ReverseMap();
         }
     }
 }

@@ -28,11 +28,14 @@ namespace UserTimeline.API.EventBusConsumers
             var query = new GetTimelineQuery(entity.UserName);
             var timeline = await _mediator.Send(query);
 
-            // TODO map
-            var test = new Timeline(entity.UserName);
-            test.Items.Add(entity);
+            if (timeline == null)
+            {
+                timeline = new TimelineViewModel(entity.UserName);
+            }
 
-            var command = _mapper.Map<UpdateTimelineCommand>(test);
+            timeline.Items.Insert(0, entity);
+
+            var command = _mapper.Map<UpdateTimelineCommand>(timeline);
             await _mediator.Send(command);
             
         }

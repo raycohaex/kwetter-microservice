@@ -21,14 +21,14 @@ namespace UserTimeline.Infrastructure.Repositories
 
         public async Task<Timeline> GetTimeline(string userName)
         {
-            var basket = await _cache.GetStringAsync(userName);
+            var timeline = await _cache.GetStringAsync(userName);
 
-            if (String.IsNullOrEmpty(basket))
+            if (String.IsNullOrEmpty(timeline))
             {
                 return null;
             }
 
-            return JsonConvert.DeserializeObject<Timeline>(basket);
+            return JsonConvert.DeserializeObject<Timeline>(timeline);
         }
 
         public async Task<Timeline> UpdateTimeline(Timeline timeline)
