@@ -22,8 +22,8 @@ namespace Kweet.Application.Features.Queries.GetKweet
 
         public async Task<KweetViewModel> Handle(GetKweetQuery request, CancellationToken cancellationToken)
         {
-            var orders = await _kweetRepository.GetKweetById(request.Id);
-            return _mapper.Map<KweetViewModel>(orders);
+            var kweet = await _kweetRepository.GetKweetById(request.Id);
+            return _mapper.Map<KweetViewModel>(kweet);
         }
     }
 }
