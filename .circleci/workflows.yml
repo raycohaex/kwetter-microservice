@@ -57,7 +57,7 @@ workflows:
       - test-kweetapi
       - build-kweetapi:
           requires:
-            - test
+            - test-kweetapi
           filters:
             branches:
               only: main
