@@ -49,6 +49,7 @@ jobs:
       - run:
           name: "Build Application according to some given configuration"
           command: dotnet.exe build --configuration Release
+
 workflows:
   kweetapi:
     when: << pipeline.parameters.run-kweet-workflow >>
@@ -60,19 +61,19 @@ workflows:
           filters:
             branches:
               only: main
-  usertimeline:
-    when: << pipeline.parameters.run-usertimeline-workflow >>
-    jobs:
-      - build-timelineapi
-      - build-timelineapi:
-          filters:
-            branches:
-              only: main
-  common:
-    when: << pipeline.parameters.run-common-workflow >>
-    jobs:
-      - build-common
-      - build-common:
-          filters:
-            branches:
-              only: main
+  # usertimeline:
+  #   when: << pipeline.parameters.run-usertimeline-workflow >>
+  #   jobs:
+  #     - build-timelineapi
+  #     - build-timelineapi:
+  #         filters:
+  #           branches:
+  #             only: main
+  # common:
+  #   when: << pipeline.parameters.run-common-workflow >>
+  #   jobs:
+  #     - build-common
+  #     - build-common:
+  #         filters:
+  #           branches:
+  #             only: main
