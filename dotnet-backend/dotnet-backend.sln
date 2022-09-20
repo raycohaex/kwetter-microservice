@@ -39,6 +39,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integration", "Integration"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Application.UnitTests", "src\Tests\Unit\Kweet.Application.UnitTests\Kweet.Application.UnitTests.csproj", "{941E8875-E727-4A2E-9E2F-A16BED75BCB2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.IntegrationTests", "src\Tests\Integration\Kweet.IntegrationTests\Kweet.IntegrationTests.csproj", "{63AAD66C-E905-4171-AA2D-D696F4FD86D9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -89,6 +91,10 @@ Global
 		{941E8875-E727-4A2E-9E2F-A16BED75BCB2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{941E8875-E727-4A2E-9E2F-A16BED75BCB2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{941E8875-E727-4A2E-9E2F-A16BED75BCB2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63AAD66C-E905-4171-AA2D-D696F4FD86D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63AAD66C-E905-4171-AA2D-D696F4FD86D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63AAD66C-E905-4171-AA2D-D696F4FD86D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63AAD66C-E905-4171-AA2D-D696F4FD86D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -108,6 +114,7 @@ Global
 		{B9426254-3539-4BC4-AD34-85C469B3B8D8} = {B685EE80-A588-488E-B7C7-5ABE246B1046}
 		{4C4E88EF-7755-4028-9012-B083DEB032D2} = {B685EE80-A588-488E-B7C7-5ABE246B1046}
 		{941E8875-E727-4A2E-9E2F-A16BED75BCB2} = {B9426254-3539-4BC4-AD34-85C469B3B8D8}
+		{63AAD66C-E905-4171-AA2D-D696F4FD86D9} = {4C4E88EF-7755-4028-9012-B083DEB032D2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {453852FF-C494-4E5E-844B-14EA98ED9CB6}
