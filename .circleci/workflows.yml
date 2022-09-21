@@ -4,6 +4,12 @@ orbs:
   windows: circleci/windows@2.2.0
   docker: circleci/docker@1.5.0
 
+executors:
+  dind-executor:
+    docker:
+      - image: 'docker:stable-dind'
+    resource_class: small
+
 parameters:
   run-kweet-workflow:
     type: boolean
@@ -30,8 +36,7 @@ jobs:
       
   build-kweetapi:
     description: Build application with Release configuration
-    docker: 
-      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    executor: dind-executor
     steps:
       - checkout
       - setup_remote_docker:
