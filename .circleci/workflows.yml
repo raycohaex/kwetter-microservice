@@ -19,7 +19,7 @@ jobs:
   test-kweetapi:
     description: Test the Kweet API
     docker:
-      name: mcr.microsoft.com/dotnet/sdk:6.0
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - run:
