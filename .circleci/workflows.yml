@@ -27,17 +27,26 @@ jobs:
           command: |
             cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
             dotnet test
-            ls
       
   build-kweetapi:
     description: Build application with Release configuration
     executor:
-      name: windows/default
+      docker: raycoh/kwetter-microservice:kweetapi
     steps:
       - checkout
       - run:
           name: "Build and push Docker image"
-          command: ls
+          command: |
+            cd dotnet-backend/src/Services/Kweet/Kweet.API
+            docker build -t kweetapi .
+      - run:
+        # Pushes the Docker image you created to the Docker Hub.
+        # Replace khabdrick/circleci-tutorial:v1 with the 
+				# <docker_hub_username/docker-hub-password:version> you used to build the image above
+        name: Push to Docker Hub
+        command: |
+          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
+          docker push raycoh/kwetter-microservice:kweetapi
 
 workflows:
   kweetapi:
