@@ -30,7 +30,8 @@ jobs:
       
   build-kweetapi:
     description: Build application with Release configuration
-    executor: docker
+      docker: 
+        - image: docker:20.10.18-git
     steps:
       - checkout
       - run:
