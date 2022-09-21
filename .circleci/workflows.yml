@@ -17,29 +17,18 @@ parameters:
 
 jobs:
   test-kweetapi:
-    description: Setup and run application tests
-    executor:
-      name: windows/default
+    description: Test the Kweet API
+    docker:
+      name: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
-      - restore_cache:
-          keys:
-            - dotnet-packages-v1-{{ checksum "dotnet-backend/src/Services/Kweet/Kweet.API/Kweet.API.csproj" }}
       - run:
-          name: "Install project dependencies"
-          command: dotnet.exe restore
-      - save_cache:
-          paths:
-            - C:\Users\circleci\.nuget\packages
-          key: dotnet-packages-v1-{{ checksum "dotnet-backend/src/Services/Kweet/Kweet.API/Kweet.API.csproj" }}
-      - run:
-          name: "Run Application Tests"
-          command: dotnet.exe test -v n --results-directory:test_coverage --collect:"Code Coverage"
-      - run:
-          name: "Print Working Directory"
-          command: pwd
-      - store_artifacts:
-          path: C:\Users\circleci\project\test_coverage   
+          name: Unit tests
+          command: |
+            cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
+            dotnet test
+            ls
+      
   build-kweetapi:
     description: Build application with Release configuration
     executor:
@@ -47,8 +36,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "Build Application according to some given configuration"
-          command: dotnet.exe build --configuration Release
+          name: "Build and push Docker image"
+          command: ls
 
 workflows:
   kweetapi:
