@@ -40,13 +40,10 @@ jobs:
             cd dotnet-backend/src/Services/Kweet/Kweet.API
             docker build -t kweetapi .
       - run:
-        # Pushes the Docker image you created to the Docker Hub.
-        # Replace khabdrick/circleci-tutorial:v1 with the 
-				# <docker_hub_username/docker-hub-password:version> you used to build the image above
-        name: Push to Docker Hub
-        command: |
-          docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
-          docker push raycoh/kwetter-microservice:kweetapi
+          name: Push to Docker Hub
+          command: |
+            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
+            docker push raycoh/kwetter-microservice:kweetapi
 
 workflows:
   kweetapi:
