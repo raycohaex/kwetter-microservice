@@ -30,9 +30,7 @@ jobs:
       
   build-kweetapi:
     description: Build application with Release configuration
-    executor:
-      docker: 
-        - image: raycoh/kwetter-microservice:kweetapi
+    executor: docker
     steps:
       - checkout
       - run:
