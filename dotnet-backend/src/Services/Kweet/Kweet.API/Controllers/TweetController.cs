@@ -25,7 +25,7 @@ namespace Kweet.API.Controllers
             _publish = publish;
         }
 
-        [HttpGet("{tweetId}", Name = "GetKweet")]
+        [HttpGet("{tweetId}")]
         [ProducesResponseType(typeof(KweetViewModel), (int)HttpStatusCode.OK)]
         public async Task<ActionResult<KweetViewModel>> GetKweetById(Guid tweetId)
         {

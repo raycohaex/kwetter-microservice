@@ -1,8 +1,8 @@
 version: 2.1
 
-orbs:
-  windows: circleci/windows@2.2.0
-  docker: circleci/docker@1.5.0
+# orbs:
+#   windows: circleci/windows@2.2.0
+#   docker: circleci/docker@1.5.0
 
 executors:
   dind-executor:
@@ -36,10 +36,11 @@ jobs:
       
   build-kweetapi:
     description: Build application with Release configuration
-    docker:
-      - image: cimg/base:2022.09
+    executor: dind-executor
     steps:
       - checkout
+      - setup_remote_docker:
+          docker_layer_caching: true
       - run:
           name: "Build and push Docker image"
           command: |

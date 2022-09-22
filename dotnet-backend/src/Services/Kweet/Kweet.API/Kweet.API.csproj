@@ -29,4 +29,8 @@
     <ProjectReference Include="..\Kweet.Infrastructure\Kweet.Infrastructure.csproj" />
   </ItemGroup>
 
+    <ItemGroup>
+	    <InternalsVisibleTo Include="../../Tests/Integration/Kweet.IntegrationTests" />
+    </ItemGroup>
+
 </Project>
