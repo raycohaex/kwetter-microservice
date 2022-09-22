@@ -50,7 +50,7 @@ jobs:
           name: Push to Docker Hub
           command: |
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
-            docker push raycoh/kweet-api:stable
+            docker push raycoh/kweet-api
 
 workflows:
   kweetapi:
