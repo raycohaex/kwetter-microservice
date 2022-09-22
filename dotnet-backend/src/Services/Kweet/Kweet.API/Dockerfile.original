@@ -9,7 +9,6 @@ WORKDIR /src
 COPY ["src/Services/Kweet/Kweet.API/Kweet.API.csproj", "src/Services/Kweet/Kweet.API/"]
 COPY ["src/Services/Kweet/Kweet.Application/Kweet.Application.csproj", "src/Services/Kweet/Kweet.Application/"]
 COPY ["src/Services/Kweet/Kweet.Domain/Kweet.Domain.csproj", "src/Services/Kweet/Kweet.Domain/"]
-COPY ["src/BuildingBlocks/Eventbus.Messages/Eventbus.Messages.csproj", "src/BuildingBlocks/Eventbus.Messages/"]
 COPY ["src/Services/Kweet/Kweet.Infrastructure/Kweet.Infrastructure.csproj", "src/Services/Kweet/Kweet.Infrastructure/"]
 RUN dotnet restore "src/Services/Kweet/Kweet.API/Kweet.API.csproj"
 COPY . .
