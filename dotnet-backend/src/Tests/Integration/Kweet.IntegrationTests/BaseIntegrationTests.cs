@@ -1,5 +1,8 @@
 using Kweet.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc.Testing;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using System;
 
@@ -12,12 +15,20 @@ namespace Kweet.IntegrationTests
         public BaseIntegrationTests()
         {
             var application = new WebApplicationFactory<Program>()
-                .WithWebHostBuilder(builder =>
+                .WithWebHostBuilder(host =>
                 {
-                    builder.ConfigureServices(services =>
+                    host.ConfigureServices(services =>
                     {
-                        services.RemoveAll(typeof(KweetContext));
-                        services.AddDbContext<KweetContext>(options => { options.UseInMemoryDatabase("TestDb"); });
+                        var descriptor = services.SingleOrDefault(
+                            d => d.ServiceType ==
+                            typeof(DbContextOptions<KweetContext>));
+
+                        services.Remove(descriptor);
+
+                        services.AddDbContext<KweetContext>(options =>
+                        {
+                            options.UseInMemoryDatabase("InMemoryDB");
+                        });
                     });
                 });
 
