@@ -45,12 +45,12 @@ jobs:
           name: "Build and push Docker image"
           command: |
             cd dotnet-backend/src
-            docker build -t kweetapi -f Dockerfile.kweet .
+            docker build -t raycoh/kweet-api -f Dockerfile.kweet .
       - run:
           name: Push to Docker Hub
           command: |
             docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
-            docker push raycoh/kwetter-microservice:kweetapi
+            docker push raycoh/kweet-api:stable
 
 workflows:
   kweetapi:
