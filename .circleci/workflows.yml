@@ -36,11 +36,10 @@ jobs:
       
   build-kweetapi:
     description: Build application with Release configuration
-    executor: dind-executor
+    docker:
+      - image: cimg/base:2022.09
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
       - run:
           name: "Build and push Docker image"
           command: |
