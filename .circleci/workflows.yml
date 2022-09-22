@@ -44,8 +44,8 @@ jobs:
       - run:
           name: "Build and push Docker image"
           command: |
-            cd dotnet-backend/src/Services/Kweet/Kweet.API
-            docker build -t kweetapi .
+            cd dotnet-backend/src
+            docker build -t kweetapi -f Dockerfile.kweet .
       - run:
           name: Push to Docker Hub
           command: |
