@@ -48,7 +48,6 @@ jobs:
           command: |
             cd dotnet-backend/src/Services/Kweet/Kweet.API
             dotnet tool install dotnet-sonarscanner
-            dotnet tool run dotnet-sonarscanner
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
             dotnet build Kweet.API.csproj
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
