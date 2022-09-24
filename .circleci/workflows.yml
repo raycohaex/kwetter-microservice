@@ -54,13 +54,16 @@ jobs:
             dotnet tool install dotnet-sonarscanner
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
             dotnet build Kweet.API.csproj --no-incremental
+            dotnet dotcover test --dcReportType=HTML
+            dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
             cd ../../../Tests/Unit/Kweet.Application.UnitTests
             dotnet new tool-manifest
             dotnet tool install dotnet-sonarscanner
             dotnet tool install JetBrains.dotCover.GlobalTool
+            dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
             dotnet dotcover test --dcReportType=HTML
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
-      
+
   build-kweetapi:
     description: Build application with Release configuration
     executor: dind-executor
