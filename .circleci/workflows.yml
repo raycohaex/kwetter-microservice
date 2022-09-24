@@ -57,8 +57,8 @@ jobs:
             cd ../../../Tests/Unit/Kweet.Application.UnitTests
             dotnet new tool-manifest
             dotnet tool install dotnet-sonarscanner
-            dotnet tool install dotnet-coverage
-            dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
+            dotnet tool install JetBrains.dotCover.GlobalTool
+            dotnet dotcover test --dcReportType=HTML
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
       
   build-kweetapi:
