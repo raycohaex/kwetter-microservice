@@ -49,7 +49,7 @@ jobs:
             cd dotnet-backend/src/Services/Kweet/Kweet.API
             sudo apt-get update && sudo apt-get install -y openjdk-11-jdk && sudo apt-get install -y ant && sudo apt-get clean;
             sudo apt-get update && sudo apt-get install -y ca-certificates-java && sudo apt-get clean && sudo update-ca-certificates -f;
-            chmod +x sonarcube/sonar-scanner-4.4.0.2170/bin/sonar-scanner
+            chmod +x sonarcube/sonar-scanner-4.7.0.2747/bin/sonar-scanner
             dotnet sonarcube/SonarScanner.MSBuild.dll begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
             dotnet build Kweet.API.csproj
             dotnet sonarcube/SonarScanner.MSBuild.dll end /d:sonar.login=$SONARQUBE_LOGIN
