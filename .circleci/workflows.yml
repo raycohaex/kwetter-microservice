@@ -39,8 +39,8 @@ jobs:
 
   analyse-kweetapi:
     description: Scan with SonarQube
-    machine:
-      image: ubuntu-2204:2022.07.1
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
     steps:
       - checkout
       - run:
