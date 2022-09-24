@@ -4,11 +4,17 @@ version: 2.1
 #   windows: circleci/windows@2.2.0
 #   docker: circleci/docker@1.5.0
 
+orbs:
+  sonarscanner: psl/sonarscanner@0.0.4
+
 executors:
   dind-executor:
     docker:
       - image: 'docker:stable-dind'
     resource_class: small
+  scanner:
+    docker:
+      - image: openjdk:11
 
 parameters:
   run-kweet-workflow:
@@ -33,6 +39,22 @@ jobs:
           command: |
             cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
             dotnet test
+
+  analyse-kweetapi:
+    description: Scan with SonarQube
+    machine:
+      image: ubuntu-2204:2022.07.1
+    steps:
+      - run:
+          name: Install Sonarqube scanner
+          command: |
+            cd dotnet-backend/src/Services/Kweet/Kweet.API
+            apt-get update && apt-get install -y openjdk-11-jdk && apt-get install -y ant && apt-get clean;
+            apt-get update && apt-get install -y ca-certificates-java && apt-get clean && update-ca-certificates -f;
+            chmod +x sonarcube/sonar-scanner-4.4.0.2170/bin/sonar-scanner
+            dotnet sonarcube/SonarScanner.MSBuild.dll begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
+            dotnet build Kweet.API.csproj
+            dotnet sonarcube/SonarScanner.MSBuild.dll end /d:sonar.login=$SONARQUBE_LOGIN
       
   build-kweetapi:
     description: Build application with Release configuration
@@ -57,6 +79,9 @@ workflows:
     when: << pipeline.parameters.run-kweet-workflow >>
     jobs:
       - test-kweetapi
+      - analyse-kweetapi:
+          requires:
+            - test-kweetapi
       - build-kweetapi:
           requires:
             - test-kweetapi
