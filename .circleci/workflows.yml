@@ -4,9 +4,6 @@ version: 2.1
 #   windows: circleci/windows@2.2.0
 #   docker: circleci/docker@1.5.0
 
-orbs:
-  sonarscanner: psl/sonarscanner@0.0.4
-
 executors:
   dind-executor:
     docker:
