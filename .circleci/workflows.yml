@@ -45,7 +45,7 @@ jobs:
       - run:
           name: Switch directory to cirleci user
           command: |
-            cd ../../home/circleci
+            ls
       - checkout
       - run:
           name: Install Sonarqube scanner
@@ -87,6 +87,7 @@ workflows:
       - build-kweetapi:
           requires:
             - test-kweetapi
+            - analyse-kweetapi
           filters:
             branches:
               only: main
