@@ -46,6 +46,8 @@ jobs:
       - run:
           name: Install Sonarqube scanner
           command: |
+            sudo apt-get update && sudo apt-get install -y openjdk-11-jdk && sudo apt-get install -y ant && sudo apt-get clean;
+            sudo apt-get update && sudo apt-get install -y ca-certificates-java && sudo apt-get clean && update-ca-certificates -f;
             cd dotnet-backend/src/Services/Kweet/Kweet.API
             dotnet tool install dotnet-sonarscanner
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
