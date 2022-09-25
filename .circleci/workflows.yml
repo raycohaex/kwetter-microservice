@@ -52,9 +52,14 @@ jobs:
             export PATH="${PATH}:/root/.dotnet/tools"
             cd dotnet-backend/src/Services/Kweet/Kweet.API
             dotnet tool install dotnet-sonarscanner
+            dotnet tool install --global coverlet.console
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
             dotnet build Kweet.API.csproj --no-incremental
-            dotnet dotcover test --dcReportType=HTML
+            coverlet .\CovExample.Tests\bin\Debug\net6.0\CovExample.Tests.dll
+            --target "dotnet" 
+            --targetargs "test ../../../Tests/Unit/Kweet.Application.UnitTests --no-build"
+            -f=opencover 
+            -o="coverage.xml"
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
   build-kweetapi:
