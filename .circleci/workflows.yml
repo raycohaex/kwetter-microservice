@@ -52,10 +52,11 @@ jobs:
             export PATH="${PATH}:/root/.dotnet/tools"
             cd dotnet-backend/src/Services/Kweet/Kweet.API
             dotnet tool install dotnet-sonarscanner
-            dotnet tool install --global dotnet-coverage
-            dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.cs.opencover.reportsPaths=coverage.xml
+            dotnet tool install --global dotnet-reportgenerator-globaltool
+            dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.coverageReportPaths="coverage/SonarQube.xml"
             dotnet build Kweet.API.csproj --no-incremental
-            dotnet-coverage collect 'dotnet test ./../../../Tests/Unit/Kweet.Application.UnitTests' -f xml  -o 'coverage.xml'
+            dotnet test ./../../../Tests/Unit/Kweet.Application.UnitTests/*.csproj --collect:"XPlat Code Coverage" --results-directory ./coverage
+            reportgenerator "-reports:./coverage/*/coverage.cobertura.xml" "-targetdir:coverage" "-reporttypes:SonarQube"
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
   build-kweetapi:
