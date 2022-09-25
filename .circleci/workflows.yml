@@ -55,9 +55,8 @@ jobs:
             dotnet tool install --global dotnet-reportgenerator-globaltool
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.coverageReportPaths="coverage/SonarQube.xml"
             dotnet build Kweet.API.csproj --no-incremental
-            pwd
-            dotnet test ./../../../Tests/Unit/Kweet.Application.UnitTests/*.csproj --collect:"XPlat Code Coverage" --results-directory ./coverage
-            reportgenerator "-reports:coverage/*/coverage.cobertura.xml" "-targetdir:coverage" "-reporttypes:SonarQube"
+            dotnet test ./../../../Tests/Unit/Kweet.Application.UnitTests/ --collect:"XPlat Code Coverage" --results-directory ./coverage
+            reportgenerator "-reports:./coverage/*/coverage.cobertura.xml" "-targetdir:coverage" "-reporttypes:SonarQube"
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
   build-kweetapi:
