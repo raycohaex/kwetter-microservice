@@ -56,7 +56,7 @@ jobs:
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.coverageReportPaths="coverage/SonarQube.xml"
             dotnet build Kweet.API.csproj --no-incremental
             dotnet test ./../../../Tests/Unit/Kweet.Application.UnitTests/ --output build --collect:"XPlat Code Coverage";
-            reportgenerator -reports:'../coverage.cobertura.xml' -targetdir:'CoverageReports' -reporttypes:'Cobertura'
+            reportgenerator -reports:'./coverage.cobertura.xml' -targetdir:'CoverageReports' -reporttypes:'Cobertura'
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
   build-kweetapi:
