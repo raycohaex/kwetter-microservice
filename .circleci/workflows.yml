@@ -1,9 +1,5 @@
 version: 2.1
 
-# orbs:
-#   windows: circleci/windows@2.2.0
-#   docker: circleci/docker@1.5.0
-
 executors:
   dind-executor:
     docker:
@@ -44,21 +40,21 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install Sonarqube scanner
+          name: Install & Run SonarScan and publish to "docker.rayco.digital:9000"
           command: |
             mkdir -p /usr/share/man/man1 && apt-get update && apt-get install -y --no-install-recommends openjdk-11-jre-headless && rm -rf /var/lib/apt/lists/*
             export JAVA_VER=11
             export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
             export PATH="${PATH}:/root/.dotnet/tools"
             cd dotnet-backend/src/Services/Kweet/Kweet.API
-            dotnet new tool-manifest
+            dotnet new tool-manifest --force
             dotnet tool install dotnet-sonarscanner
             dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
             dotnet build
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
-  build-kweetapi:
-    description: Build application with Release configuration
+  publish-kweetapi:
+    description: Publish application to registry
     executor: dind-executor
     steps:
       - checkout
@@ -83,7 +79,7 @@ workflows:
       - analyse-kweetapi:
           requires:
             - test-kweetapi
-      - build-kweetapi:
+      - publish-kweetapi:
           requires:
             - test-kweetapi
             - analyse-kweetapi
