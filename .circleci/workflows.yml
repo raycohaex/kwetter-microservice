@@ -41,7 +41,6 @@ jobs:
     description: Scan with SonarQube
     docker:
       - image: mcr.microsoft.com/dotnet/sdk:6.0
-    working_directory: dotnet-backend/src/
     steps:
       - checkout
       - run:
@@ -51,7 +50,7 @@ jobs:
             export JAVA_VER=11
             export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
             export PATH="${PATH}:/root/.dotnet/tools"
-            cd Tests/Unit/Kweet.Application.UnitTests/
+            cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests/
             dotnet new tool-manifest
             dotnet tool install dotnet-sonarscanner
             dotnet tool install --global dotnet-coverage
