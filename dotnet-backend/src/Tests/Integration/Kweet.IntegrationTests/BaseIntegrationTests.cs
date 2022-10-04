@@ -1,6 +1,7 @@
 using Kweet.API.Controllers;
 using Kweet.Application.Features.Queries.GetKweet;
 using Kweet.Infrastructure.Persistence;
+using MassTransit;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,8 @@ namespace Kweet.IntegrationTests
                             typeof(DbContextOptions<KweetContext>));
 
                         services.Remove(descriptor);
+
+                        services.AddMassTransitTestHarness();
 
                         services.AddDbContext<KweetContext>(options =>
                         {
