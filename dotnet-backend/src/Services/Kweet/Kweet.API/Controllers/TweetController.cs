@@ -47,16 +47,5 @@ namespace Kweet.API.Controllers
 
             return Ok(result);
         }
-
-        [HttpGet]
-        public ActionResult BadPractiseSecurityTest(string val)
-        {
-            string username = "admin";
-            string password = "Admin123"; // Sensitive
-            string usernamePassword = "user=admin&password=Admin123"; // Sensitive
-            string url = "scheme://user:Admin123@domain.com"; // Sensitive
-
-            return BadRequest();
-        }
     }
 }
