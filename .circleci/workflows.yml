@@ -32,11 +32,9 @@ jobs:
           command: |
             cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
             dotnet new tool-manifest --force
-            dotnet test -c Debug -r ./cobertura --collect:"XPlat Code Coverage" --test-adapter-path:. --logger:"junit;LogFilePath=./junit/junit-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
+            dotnet test --collect:"XPlat Code Coverage"
       - store_test_results:
-          path: /cobertura/*/coverage.cobertura.xml
-      - store_test_results:
-          path: /junit/junit-test-result.xml
+          path: /TestResults/**/coverage.cobertura.xml
   analyse-kweetapi:
     description: Scan with SonarQube
     docker:
