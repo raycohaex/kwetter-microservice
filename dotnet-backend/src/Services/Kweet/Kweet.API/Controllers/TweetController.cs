@@ -51,10 +51,10 @@ namespace Kweet.API.Controllers
         [HttpGet]
         public ActionResult BadPractiseSecurityTest(string val)
         {
-            Response.AddHeader("Set-Cookie", val);  // Noncompliant
-            HttpCookie cookie = new HttpCookie("ASP.NET_SessionId", val);  // Noncompliant
-            Response.AppendCookie(cookie);
-            return View("");
+            string username = "admin";
+            string password = "Admin123"; // Sensitive
+            string usernamePassword = "user=admin&password=Admin123"; // Sensitive
+            string url = "scheme://user:Admin123@domain.com"; // Sensitive
         }
     }
 }
