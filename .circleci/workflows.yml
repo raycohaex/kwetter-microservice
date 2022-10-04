@@ -34,7 +34,7 @@ jobs:
             dotnet new tool-manifest --force
             dotnet test --collect:"XPlat Code Coverage"
       - store_test_results:
-          path: /TestResults/**/coverage.cobertura.xml
+          path: dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests/TestResults/**/coverage.cobertura.xml
   analyse-kweetapi:
     description: Scan with SonarQube
     docker:
