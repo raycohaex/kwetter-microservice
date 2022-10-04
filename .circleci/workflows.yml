@@ -50,13 +50,11 @@ jobs:
             export JAVA_VER=11
             export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
             export PATH="${PATH}:/root/.dotnet/tools"
-            cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests/
+            cd dotnet-backend/src/Services/Kweet/Kweet.API
             dotnet new tool-manifest
             dotnet tool install dotnet-sonarscanner
-            dotnet tool install --global dotnet-coverage
-            dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN /d:sonar.cs.vscoveragexml.reportsPaths=coverage.xml
-            dotnet build --no-incremental
-            dotnet-coverage collect 'dotnet test' -f xml  -o 'coverage.xml'
+            dotnet sonarscanner begin /k:"Kwetter" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
+            dotnet build
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
   build-kweetapi:
