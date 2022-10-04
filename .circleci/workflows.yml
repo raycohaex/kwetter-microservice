@@ -31,7 +31,7 @@ jobs:
           name: Unit tests
           command: |
             cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
-            otnet new tool-manifest --force
+            dotnet new tool-manifest --force
             dotnet test -c Debug -r ./cobertura --collect:"XPlat Code Coverage" --test-adapter-path:. --logger:"junit;LogFilePath=./junit/junit-test-result.xml;MethodFormat=Class;FailureBodyFormat=Verbose"
       - store_test_results:
           path: /cobertura/*/coverage.cobertura.xml
