@@ -31,10 +31,13 @@ jobs:
           name: Unit tests
           command: |
             cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
-            dotnet new tool-manifest --force
+            dotnet test --collect:"XPlat Code Coverage"
+            cd ../../Integration/Kweet.IntegrationTests
             dotnet test --collect:"XPlat Code Coverage"
       - store_artifacts:
           path: dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests/TestResults/
+      - store_artifacts:
+          path: dotnet-backend/src/Tests/Integration/Kweet.IntegrationTests/TestResults/
   analyse-kweetapi:
     description: Scan with SonarQube
     docker:
