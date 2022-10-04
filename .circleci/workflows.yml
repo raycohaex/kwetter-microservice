@@ -28,7 +28,7 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Unit tests
+          name: Unit & Integration tests
           command: |
             cd dotnet-backend/src/Tests/Unit/Kweet.Application.UnitTests
             dotnet test --collect:"XPlat Code Coverage"
