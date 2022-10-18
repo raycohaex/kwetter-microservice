@@ -5,6 +5,7 @@ using Microsoft.OpenApi.Models;
 using UserTimeline.API.EventBusConsumers;
 using UserTimeline.Application;
 using UserTimeline.Application.Contracts.Persistence;
+using UserTimeline.Infrastructure.Persistence;
 using UserTimeline.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -46,6 +47,7 @@ builder.Services.AddSwaggerGen(options => {
 
 // TODO: Consider moving to smaller register function like in the Kweet API.
 builder.Services.AddScoped<IUserTimelineRepository, UserTimelineRepository>();
+builder.Services.AddScoped<IUserTimelineContext, UserTimelineContext>();
 builder.Services.AddAutoMapper(typeof(Program));
 
 var app = builder.Build();
