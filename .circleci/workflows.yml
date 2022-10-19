@@ -71,13 +71,13 @@ jobs:
           image: Kweet-API
           path: dotnet-backend/src
           dockerfile: Dockerfile.kweet
-          tag: v-1
+          tag: v1
           no_output_timeout: 20m
           registry-url: eu.gcr.io
       - gcp-gcr/push-image:
           digest-path: /tmp/digest.txt
           image: Kweet-API
-          tag: v-1
+          tag: v1
           registry-url: eu.gcr.io
       - run:
           command: |
