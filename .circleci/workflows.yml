@@ -1,5 +1,8 @@
 version: 2.1
 
+orbs:
+  gcp-gcr: circleci/gcp-gcr@0.15.0
+
 executors:
   dind-executor:
     docker:
@@ -60,21 +63,40 @@ jobs:
 
   publish-kweetapi:
     description: Publish application to registry
-    executor: dind-executor
+    executor: gcp-gcr/default
     steps:
       - checkout
-      - setup_remote_docker:
-          docker_layer_caching: true
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: Kweet-API
+          path: dotnet-backend/src
+          dockefile: Dockerfile.kweet
+          tag: v-1
+          no_output_timeout: 20m
+          registry-url: eu.gcr.io
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: Kweet-API
+          tag: v-1
+          registry-url: eu.gcr.io
       - run:
-          name: "Build and push Docker image"
           command: |
-            cd dotnet-backend/src
-            docker build -t raycoh/kweet-api -f Dockerfile.kweet .
-      - run:
-          name: Push to Docker Hub
-          command: |
-            docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
-            docker push raycoh/kweet-api
+            echo "Digest is: $(</tmp/digest.txt)"
+    # executor: dind-executor
+    # steps:
+    #   - checkout
+    #   - setup_remote_docker:
+    #       docker_layer_caching: true
+    #   - run:
+    #       name: "Build and push Docker image"
+    #       command: |
+    #         cd dotnet-backend/src
+    #         docker build -t raycoh/kweet-api -f Dockerfile.kweet .
+    #   - run:
+    #       name: Push to Docker Hub
+    #       command: |
+    #         docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
+    #         docker push raycoh/kweet-api
 
 workflows:
   kweetapi:
