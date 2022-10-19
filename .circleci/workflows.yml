@@ -68,7 +68,7 @@ jobs:
       - checkout
       - gcp-gcr/gcr-auth
       - gcp-gcr/build-image:
-          image: Kweet-API
+          image: kweetapi
           path: dotnet-backend/src
           dockerfile: Dockerfile.kweet
           tag: v1
@@ -76,7 +76,7 @@ jobs:
           registry-url: eu.gcr.io
       - gcp-gcr/push-image:
           digest-path: /tmp/digest.txt
-          image: Kweet-API
+          image: kweetapi
           tag: v1
           registry-url: eu.gcr.io
       - run:
