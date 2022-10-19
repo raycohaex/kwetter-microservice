@@ -69,7 +69,7 @@ jobs:
       - gcp-gcr/gcr-auth
       - gcp-gcr/build-image:
           image: kweetapi
-          path: /dotnet-backend/src
+          path: dotnet-backend/src
           dockerfile: Dockerfile.kweet
           tag: v1
           no_output_timeout: 20m
