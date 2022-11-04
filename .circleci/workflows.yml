@@ -24,6 +24,9 @@ parameters:
     default: false
 
 jobs:
+  ############# 
+  # TWEET API # 
+  ############# 
   test-kweetapi:
     description: Test the Kweet API
     docker:
@@ -82,21 +85,51 @@ jobs:
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
-    # executor: dind-executor
-    # steps:
-    #   - checkout
-    #   - setup_remote_docker:
-    #       docker_layer_caching: true
-    #   - run:
-    #       name: "Build and push Docker image"
-    #       command: |
-    #         cd dotnet-backend/src
-    #         docker build -t raycoh/kweet-api -f Dockerfile.kweet .
-    #   - run:
-    #       name: Push to Docker Hub
-    #       command: |
-    #         docker login -u $DOCKERHUB_USERNAME -p $DOCKERHUB_ACCESS_TOKEN
-    #         docker push raycoh/kweet-api
+
+  #################
+  # USER TIMELINE #
+  ################# 
+  analyse-usertimeline:
+    description: Scan with SonarQube
+    docker:
+      - image: mcr.microsoft.com/dotnet/sdk:6.0
+    steps:
+      - checkout
+      - run:
+          name: Install & Run SonarScan and publish to "docker.rayco.digital:9000"
+          command: |
+            mkdir -p /usr/share/man/man1 && apt-get update && apt-get install -y --no-install-recommends openjdk-11-jre-headless && rm -rf /var/lib/apt/lists/*
+            export JAVA_VER=11
+            export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
+            export PATH="${PATH}:/root/.dotnet/tools"
+            cd dotnet-backend/src/Services/Usertimeline/Usertimeline.API
+            dotnet new tool-manifest --force
+            dotnet tool install dotnet-sonarscanner
+            dotnet sonarscanner begin /k:"kwetter-usertimeline" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
+            dotnet build
+            dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
+
+  publish-usertimeline:
+    description: Publish application to registry
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: usertimeline
+          path: dotnet-backend/src
+          dockerfile: Dockerfile.usertimeline
+          tag: v1
+          no_output_timeout: 20m
+          registry-url: eu.gcr.io
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: usertimeline
+          tag: v1
+          registry-url: eu.gcr.io
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 
 workflows:
   kweetapi:
@@ -113,14 +146,18 @@ workflows:
           filters:
             branches:
               only: main
-  # usertimeline:
-  #   when: << pipeline.parameters.run-usertimeline-workflow >>
-  #   jobs:
-  #     - build-timelineapi
-  #     - build-timelineapi:
-  #         filters:
-  #           branches:
-  #             only: main
+
+
+  usertimeline:
+    when: << pipeline.parameters.run-usertimeline-workflow >>
+    jobs:
+      - analyse-usertimeline:
+      - publish-usertimeline:
+          requires:
+            - analyse-usertimeline
+          filters:
+            branches:
+              only: main
   # common:
   #   when: << pipeline.parameters.run-common-workflow >>
   #   jobs:
