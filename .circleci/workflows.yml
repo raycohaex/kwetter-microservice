@@ -151,7 +151,7 @@ workflows:
   usertimeline:
     when: << pipeline.parameters.run-usertimeline-workflow >>
     jobs:
-      - analyse-usertimeline:
+      - analyse-usertimeline
       - publish-usertimeline:
           requires:
             - analyse-usertimeline
