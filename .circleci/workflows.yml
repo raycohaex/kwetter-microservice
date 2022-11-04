@@ -105,7 +105,7 @@ jobs:
             cd dotnet-backend/src/Services/UserTimeline/UserTimeline.API
             dotnet new tool-manifest --force
             dotnet tool install dotnet-sonarscanner
-            dotnet sonarscanner begin /k:"kwetter-usertimeline" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
+            dotnet sonarscanner begin /k:"kwetter-usertimeline" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN_UT
             dotnet build
             dotnet sonarscanner end /d:sonar.login=$SONARQUBE_LOGIN
 
