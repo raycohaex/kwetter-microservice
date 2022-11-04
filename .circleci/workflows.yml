@@ -102,7 +102,7 @@ jobs:
             export JAVA_VER=11
             export JAVA_HOME="/usr/lib/jvm/java-11-openjdk-amd64"
             export PATH="${PATH}:/root/.dotnet/tools"
-            cd dotnet-backend/src/Services/Usertimeline/Usertimeline.API
+            cd dotnet-backend/src/Services/UserTimeline/UserTimeline.API
             dotnet new tool-manifest --force
             dotnet tool install dotnet-sonarscanner
             dotnet sonarscanner begin /k:"kwetter-usertimeline" /d:sonar.host.url="http://185.182.185.197:9000" /d:sonar.login=$SONARQUBE_LOGIN
