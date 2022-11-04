@@ -86,9 +86,9 @@ jobs:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
 
-  #################
-  # USER TIMELINE #
-  ################# 
+  ################
+  # USERTIMELINE #
+  ################ 
   analyse-usertimeline:
     description: Scan with SonarQube
     docker:
