@@ -28,7 +28,8 @@ namespace UserTimeline.Application.Features.Commands.UpdateTimeline
 
             if (timelineToUpdate == null)
             {
-                timelineToUpdate = new Timeline(request.UserName);
+                timelineToUpdate = new Timeline();
+                timelineToUpdate.UserName = request.UserName;
             }
 
             _mapper.Map(request, timelineToUpdate, typeof(UpdateTimelineCommand), typeof(Timeline));

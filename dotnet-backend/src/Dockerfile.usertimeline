@@ -1,0 +1,25 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
+WORKDIR /app
+EXPOSE 80
+
+FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
+WORKDIR /src
+COPY ["dotnet-backend/src/Services/UserTimeline/UserTimeline.API/UserTimeline.API.csproj", "dotnet-backend/src/Services/UserTimeline/UserTimeline.API/"]
+COPY ["dotnet-backend/src/Services/UserTimeline/UserTimeline.Application/UserTimeline.Application.csproj", "dotnet-backend/src/Services/UserTimeline/UserTimeline.Application/"]
+COPY ["dotnet-backend/src/Services/UserTimeline/UserTimeline.Domain/UserTimeline.Domain.csproj", "dotnet-backend/src/Services/UserTimeline/UserTimeline.Domain/"]
+COPY ["dotnet-backend/src/BuildingBlocks/Eventbus.Messages/Eventbus.Messages.csproj", "dotnet-backend/src/BuildingBlocks/Eventbus.Messages/"]
+COPY ["dotnet-backend/src/Services/UserTimeline/UserTimeline.Infrastructure/UserTimeline.Infrastructure.csproj", "dotnet-backend/src/Services/UserTimeline/UserTimeline.Infrastructure/"]
+RUN dotnet restore "dotnet-backend/src/Services/UserTimeline/UserTimeline.API/UserTimeline.API.csproj"
+COPY . .
+WORKDIR "/src/dotnet-backend/src/Services/UserTimeline/UserTimeline.API"
+RUN dotnet build "UserTimeline.API.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "UserTimeline.API.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "UserTimeline.API.dll"]

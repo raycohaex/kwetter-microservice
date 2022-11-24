@@ -5,6 +5,9 @@ services:
     image: mysql
 
   db.usertimeline:
+    image: mongo
+
+  cache.usertimeline:
     image: redis:alpine
 
   db.auth:
@@ -51,6 +54,7 @@ services:
 
 volumes:
   mysql_data:
+  mongo_data:
 
 networks:
   keycloak:
