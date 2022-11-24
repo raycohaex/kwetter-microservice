@@ -7,6 +7,33 @@ services:
   db.usertimeline:
     image: redis:alpine
 
+  db.auth:
+    image: postgres:13.2
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    networks:
+      - keycloak
+
+  keycloak:
+    depends_on:
+      - db.auth
+    container_name: local_keycloak
+    environment:
+      DB_VENDOR: postgres
+      DB_ADDR: db.auth
+      DB_DATABASE: keycloak
+      DB_USER: keycloak
+      DB_PASSWORD: keycloak
+    image: jboss/keycloak:latest
+    ports:
+      - "28080:8080"
+    restart: unless-stopped
+    networks:
+      - keycloak
+
   service.rabbitmq:
     image: rabbitmq:3-management-alpine
 
@@ -24,3 +51,6 @@ services:
 
 volumes:
   mysql_data:
+
+networks:
+  keycloak:

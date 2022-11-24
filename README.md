@@ -10,3 +10,6 @@ To spin up all Docker containers locally, run;
 
 To get rid of the containers again, run;
 ```docker-compose -f docker-compose.yml -f docker-compose.override.yml down```
+
+To setup Keycloak after running docker-compose
+```docker exec local_keycloak /opt/jboss/keycloak/bin/add-user-keycloak.sh -u admin -p admin && docker restart local_keycloak```
