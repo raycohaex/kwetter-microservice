@@ -23,6 +23,7 @@
   
   <ItemGroup>
     <ProjectReference Include="..\..\Kweet.Application\Kweet.Application.csproj" />
+    <ProjectReference Include="..\..\Kweet.Infrastructure\Kweet.Infrastructure.csproj" />
     <ProjectReference Include="..\Kweet.Cmd.Domain\Kweet.Cmd.Domain.csproj" />
   </ItemGroup>
 

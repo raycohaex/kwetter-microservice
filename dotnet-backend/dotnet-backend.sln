@@ -49,13 +49,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Cmd.Api", "src\Servic
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Cmd.Domain", "src\Services\Kweet\Kweet.Cmd\Kweet.Cmd.Domain\Kweet.Cmd.Domain.csproj", "{C67013F5-2EFB-4BE6-A8FF-76BDFD3DBD7C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Cmd.Infrastructure", "src\Services\Kweet\Kweet.Cmd\Kweet.Cmd.Infrastructure\Kweet.Cmd.Infrastructure.csproj", "{341D5559-FBA9-423A-9E60-7B0B35CF753B}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Query.Api", "src\Services\Kweet\Kweet.Query\Kweet.Query.Api\Kweet.Query.Api.csproj", "{FC5E216D-C642-437A-A863-89F096F833F1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Query.Domain", "src\Services\Kweet\Kweet.Query\Kweet.Query.Domain\Kweet.Query.Domain.csproj", "{DE761854-DEFD-4DB5-90FB-60D607F84393}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Query.Infrastructure", "src\Services\Kweet\Kweet.Query\Kweet.Query.Infrastructure\Kweet.Query.Infrastructure.csproj", "{BF98BCF2-318F-4A21-9993-CFC2C657492E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -119,10 +115,6 @@ Global
 		{C67013F5-2EFB-4BE6-A8FF-76BDFD3DBD7C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C67013F5-2EFB-4BE6-A8FF-76BDFD3DBD7C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C67013F5-2EFB-4BE6-A8FF-76BDFD3DBD7C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{341D5559-FBA9-423A-9E60-7B0B35CF753B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{341D5559-FBA9-423A-9E60-7B0B35CF753B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{341D5559-FBA9-423A-9E60-7B0B35CF753B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{341D5559-FBA9-423A-9E60-7B0B35CF753B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FC5E216D-C642-437A-A863-89F096F833F1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FC5E216D-C642-437A-A863-89F096F833F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC5E216D-C642-437A-A863-89F096F833F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -131,10 +123,6 @@ Global
 		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BF98BCF2-318F-4A21-9993-CFC2C657492E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BF98BCF2-318F-4A21-9993-CFC2C657492E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BF98BCF2-318F-4A21-9993-CFC2C657492E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BF98BCF2-318F-4A21-9993-CFC2C657492E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -159,10 +147,8 @@ Global
 		{C9083289-9E1B-49D6-9104-F02F18E513DB} = {D828856A-7789-4D24-9293-66E71F69D93E}
 		{88D40527-6D5E-47CF-AF1D-3AE0E2552210} = {0507842B-1331-4D59-9006-27BA1D60466C}
 		{C67013F5-2EFB-4BE6-A8FF-76BDFD3DBD7C} = {0507842B-1331-4D59-9006-27BA1D60466C}
-		{341D5559-FBA9-423A-9E60-7B0B35CF753B} = {0507842B-1331-4D59-9006-27BA1D60466C}
 		{FC5E216D-C642-437A-A863-89F096F833F1} = {C9083289-9E1B-49D6-9104-F02F18E513DB}
 		{DE761854-DEFD-4DB5-90FB-60D607F84393} = {C9083289-9E1B-49D6-9104-F02F18E513DB}
-		{BF98BCF2-318F-4A21-9993-CFC2C657492E} = {C9083289-9E1B-49D6-9104-F02F18E513DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {453852FF-C494-4E5E-844B-14EA98ED9CB6}
