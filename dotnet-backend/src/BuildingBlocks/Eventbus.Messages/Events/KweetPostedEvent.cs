@@ -8,6 +8,11 @@ namespace Eventbus.Messages.Events
 {
     public class KweetPostedEvent: IntegrationBaseEvent
     {
+        public KweetPostedEvent() : base(nameof(KweetPostedEvent))
+        {
+
+        }
+
         public Guid Id { get; set; }
         public string? CreatedBy { get; set; }
         public DateTime CreatedOn { get; set; }

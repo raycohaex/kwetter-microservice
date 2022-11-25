@@ -6,22 +6,15 @@ using System.Threading.Tasks;
 
 namespace Eventbus.Messages.Events
 {
-    public class IntegrationBaseEvent
+    public abstract class IntegrationBaseEvent
     {
         // Base information for my MQ event
-        public IntegrationBaseEvent()
+        protected IntegrationBaseEvent(string type)
         {
-            EventId = Guid.NewGuid();
-            EventCreationDate = DateTime.UtcNow;
+            this.Type = type;
         }
 
-        public IntegrationBaseEvent(Guid id, DateTime createDate)
-        {
-            EventId = id;
-            EventCreationDate = createDate;
-        }
-
-        public Guid EventId { get; private set; }
-        public DateTime EventCreationDate { get; private set; }
+        public int Version { get; set; }
+        public string Type { get; set; }
     }
 }
