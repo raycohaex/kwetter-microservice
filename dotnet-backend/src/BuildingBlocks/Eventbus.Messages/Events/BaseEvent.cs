@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kweet.Cmd.Domain.Events
+namespace Eventbus.Messages.Events
 {
     public abstract class BaseEvent
     {

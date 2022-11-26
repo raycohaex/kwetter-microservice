@@ -5,12 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Kweet.Cmd.Domain.Aggregates
+namespace CQRS.Core.Domain
 {
     public class AggregateRoot
     {
         protected Guid _id;
-        private readonly List<IntegrationBaseEvent> _changes = new();
+        private readonly List<BaseEvent> _changes = new();
 
         public Guid Id
         {
@@ -19,7 +19,7 @@ namespace Kweet.Cmd.Domain.Aggregates
 
         public int Version { get; set; } = -1;
 
-        public IEnumerable<IntegrationBaseEvent> GetUncommittedChanges()
+        public IEnumerable<BaseEvent> GetUncommittedChanges()
         {
             return _changes;
         }
@@ -29,7 +29,7 @@ namespace Kweet.Cmd.Domain.Aggregates
             _changes.Clear();
         }
 
-        private void ApplyChange(IntegrationBaseEvent @event, bool isNew)
+        private void ApplyChange(BaseEvent @event, bool isNew)
         {
             var method = this.GetType().GetMethod("Apply", new Type[] { @event.GetType() });
 
@@ -46,12 +46,12 @@ namespace Kweet.Cmd.Domain.Aggregates
             }
         }
 
-        protected void RaiseEvent(IntegrationBaseEvent @event)
+        protected void RaiseEvent(BaseEvent @event)
         {
             ApplyChange(@event, true);
         }
 
-        public void ReplayEvents(IEnumerable<IntegrationBaseEvent> events)
+        public void ReplayEvents(IEnumerable<BaseEvent> events)
         {
             foreach (var @event in events)
             {

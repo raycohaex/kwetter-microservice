@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Eventbus.Messages.Events
 {
-    public class KweetPostedEvent
+    public class EventModel
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
@@ -18,6 +18,6 @@ namespace Eventbus.Messages.Events
         public string AggregateType { get; set; }
         public int Version { get; set; }
         public string EventType { get; set; }
-        public IntegrationBaseEvent EventData { get; set; }
+        public BaseEvent EventData { get; set; }
     }
 }

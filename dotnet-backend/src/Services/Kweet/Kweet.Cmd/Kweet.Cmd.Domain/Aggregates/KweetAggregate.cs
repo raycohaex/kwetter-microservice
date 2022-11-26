@@ -1,4 +1,6 @@
-﻿using Eventbus.Messages.Events;
+﻿using CQRS.Core.Domain;
+using Eventbus.Messages.Events;
+using Kweet.Cmd.Domain.Events;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,6 @@ namespace Kweet.Cmd.Domain.Aggregates
     {
         private bool _active;
         private string _user;
-        private readonly Dictionary<Guid, Tuple<string, string>> _comments = new();
 
         public bool Active { get => _active; set => _active = value; }
 
@@ -21,15 +22,16 @@ namespace Kweet.Cmd.Domain.Aggregates
 
         public KweetAggregate(Guid id, string username, string message)
         {
-            RaiseEvent(new KweetPostedEvent
+            RaiseEvent(new KweetCreatedEvent
             {
                 Id = id,
                 UserName = username,
-                TweetBody = message
+                TweetBody = message,
+                DatePosted = DateTime.Now
             });
         }
 
-        public void Apply(KweetPostedEvent @event)
+        public void Apply(KweetCreatedEvent @event)
         {
             _id = @event.Id;
             _active = true;
