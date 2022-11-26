@@ -4,6 +4,7 @@ using Kweet.Cmd.Domain.Events;
 using Kweet.Cmd.Infrastructure.Config;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,12 +17,12 @@ namespace Kweet.Cmd.Infrastructure.Repositories
     {
         private readonly IMongoCollection<EventModel> _eventStoreCollection;
 
-        public EventStoreRepository(IOptions<MongoDbConfig> config)
+        public EventStoreRepository(IConfiguration configuration)
         {
-            var mongoClient = new MongoClient(config.Value.ConnectionString);
-            var mongoDatabase = mongoClient.GetDatabase(config.Value.Database);
+            var mongoClient = new MongoClient(configuration.GetValue<string>("DatabaseSettings:ConnectionString"));
+            var mongoDatabase = mongoClient.GetDatabase(configuration.GetValue<string>("DatabaseSettings:Database"));
 
-            _eventStoreCollection = mongoDatabase.GetCollection<EventModel>(config.Value.Collection);
+            _eventStoreCollection = mongoDatabase.GetCollection<EventModel>(configuration.GetValue<string>("DatabaseSettings:Collection"));
         }
 
         public async Task<List<EventModel>> FindAllAsync()
