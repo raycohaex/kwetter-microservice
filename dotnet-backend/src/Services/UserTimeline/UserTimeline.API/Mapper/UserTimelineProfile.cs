@@ -11,7 +11,7 @@ namespace UserTimeline.API.Mapper
     {
         public UserTimelineProfile()
         {
-            CreateMap<KweetEntity, KweetPostedEvent>().ReverseMap();
+            CreateMap<KweetEntity, EventModel>().ReverseMap();
             CreateMap<UpdateTimelineCommand, TimelineViewModel>().ReverseMap();
         }
     }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Eventbus.Messages.Messages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Eventbus.Messages.Events
 {
-    public abstract class IntegrationBaseEvent
+    public abstract class IntegrationBaseEvent: Message
     {
         // Base information for my MQ event
         protected IntegrationBaseEvent(string type)

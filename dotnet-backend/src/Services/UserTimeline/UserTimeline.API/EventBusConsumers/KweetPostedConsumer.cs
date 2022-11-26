@@ -8,7 +8,7 @@ using UserTimeline.Application.Features.Commands.UpdateTimeline;
 
 namespace UserTimeline.API.EventBusConsumers
 {
-    public class KweetPostedConsumer : IConsumer<KweetPostedEvent>
+    public class KweetPostedConsumer : IConsumer<EventModel>
     {
         private readonly IMapper _mapper;
         private readonly IMediator _mediator;
@@ -21,7 +21,7 @@ namespace UserTimeline.API.EventBusConsumers
             _logger = logger;
         }
 
-        public async Task Consume(ConsumeContext<KweetPostedEvent> context)
+        public async Task Consume(ConsumeContext<EventModel> context)
         {
             var entity = _mapper.Map<KweetEntity>(context.Message);
 
