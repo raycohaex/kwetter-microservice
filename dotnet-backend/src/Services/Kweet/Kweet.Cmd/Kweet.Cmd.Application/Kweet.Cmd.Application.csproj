@@ -16,6 +16,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Kweet.Common\Kweet.Common.csproj" />
     <ProjectReference Include="..\Kweet.Cmd.Domain\Kweet.Cmd.Domain.csproj" />
+    <ProjectReference Include="..\Kweet.Infrastructure\Kweet.Cmd.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

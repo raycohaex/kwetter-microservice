@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Kweet.Application.Features.Commands.PostKweet;
-using MassTransit.Mediator;
+using Kweet.Cmd.Application.Commands.PostKweet;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 

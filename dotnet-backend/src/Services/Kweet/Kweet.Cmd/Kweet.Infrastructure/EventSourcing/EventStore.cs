@@ -1,4 +1,5 @@
 ﻿using CQRS.Core.Domain;
+using CQRS.Core.EventSourcing;
 using Eventbus.Messages.Events;
 using Kweet.Cmd.Domain.Aggregates;
 using System;
@@ -9,12 +10,12 @@ using System.Threading.Tasks;
 
 namespace Kweet.Cmd.Infrastructure.EventSourcing
 {
-    public class EventStore
+    public class EventStore: IEventStore
     {
         private readonly IEventStoreRepository _eventStoreRepository;
-        private readonly EventProducer _eventProducer;
+        private readonly IEventProducer _eventProducer;
 
-        public EventStore(IEventStoreRepository eventStoreRepository, EventProducer eventProducer)
+        public EventStore(IEventStoreRepository eventStoreRepository, IEventProducer eventProducer)
         {
             _eventStoreRepository = eventStoreRepository;
             _eventProducer = eventProducer;

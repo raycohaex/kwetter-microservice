@@ -1,4 +1,6 @@
-﻿using Kweet.Cmd.Domain.Events;
+﻿using CQRS.Core.Domain;
+using Eventbus.Messages.Events;
+using Kweet.Cmd.Domain.Events;
 using Kweet.Cmd.Infrastructure.Config;
 using Microsoft.Extensions.Options;
 using MongoDB.Driver;
@@ -10,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Kweet.Cmd.Infrastructure.Repositories
 {
-    public class EventStoreRepository
+    public class EventStoreRepository: IEventStoreRepository
     {
         private readonly IMongoCollection<EventModel> _eventStoreCollection;
 

@@ -11,10 +11,10 @@ namespace Kweet.Cmd.Infrastructure.EventSourcing
 {
     public class EventSourcingHandler : IEventSourcingHandler<KweetAggregate>
     {
-        private readonly EventStore _eventStore;
-        private readonly EventProducer _eventProducer;
+        private readonly IEventStore _eventStore;
+        private readonly IEventProducer _eventProducer;
 
-        public EventSourcingHandler(EventStore eventStore, EventProducer eventProducer)
+        public EventSourcingHandler(IEventStore eventStore, IEventProducer eventProducer)
         {
             _eventStore = eventStore;
             _eventProducer = eventProducer;

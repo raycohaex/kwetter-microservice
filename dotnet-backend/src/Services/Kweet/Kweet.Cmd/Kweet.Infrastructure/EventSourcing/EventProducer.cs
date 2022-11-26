@@ -1,4 +1,5 @@
-﻿using Eventbus.Messages.Events;
+﻿using CQRS.Core.EventSourcing;
+using Eventbus.Messages.Events;
 using Kweet.Cmd.Domain.Events;
 using MassTransit;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Kweet.Cmd.Infrastructure.EventSourcing
 {
-    public class EventProducer
+    public class EventProducer: IEventProducer
     {
         private readonly IPublishEndpoint _publish;
 
