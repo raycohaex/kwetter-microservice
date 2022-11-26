@@ -7,8 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MongoDB.Bson" Version="2.18.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\BuildingBlocks\Eventbus.Messages\Eventbus.Messages.csproj" />
-    <ProjectReference Include="..\..\Kweet.Application\Kweet.Application.csproj" />
   </ItemGroup>
 
 </Project>

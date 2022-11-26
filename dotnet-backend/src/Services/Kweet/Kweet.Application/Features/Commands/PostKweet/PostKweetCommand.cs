@@ -10,7 +10,8 @@ namespace Kweet.Application.Features.Commands.PostKweet
 {
     public class PostKweetCommand: IRequest<KweetEntity>
     {
-        public string UserName { get; set; }
-        public string TweetBody { get; set; }
+        public Guid Id { get; set; }
+        public string UserName { get; set; } = null!;
+        public string TweetBody { get; set; } = null!;
     }
 }

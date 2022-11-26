@@ -21,7 +21,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Eventbus.Messages\Eventbus.Messages.csproj" />
-    <ProjectReference Include="..\..\Kweet\Kweet.Application\Kweet.Application.csproj" />
     <ProjectReference Include="..\UserTimeline.Application\UserTimeline.Application.csproj" />
     <ProjectReference Include="..\UserTimeline.Infrastructure\UserTimeline.Infrastructure.csproj" />
   </ItemGroup>

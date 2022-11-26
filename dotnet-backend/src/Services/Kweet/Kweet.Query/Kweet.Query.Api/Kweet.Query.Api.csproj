@@ -22,8 +22,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Kweet.Application\Kweet.Application.csproj" />
-    <ProjectReference Include="..\..\Kweet.Infrastructure\Kweet.Infrastructure.csproj" />
     <ProjectReference Include="..\Kweet.Query.Domain\Kweet.Query.Domain.csproj" />
   </ItemGroup>
 
