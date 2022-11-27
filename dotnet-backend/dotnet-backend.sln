@@ -43,15 +43,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Cmd.Domain", "src\Ser
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Query.Api", "src\Services\Kweet\Kweet.Query\Kweet.Query.Api\Kweet.Query.Api.csproj", "{FC5E216D-C642-437A-A863-89F096F833F1}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Query.Domain", "src\Services\Kweet\Kweet.Query\Kweet.Query.Domain\Kweet.Query.Domain.csproj", "{DE761854-DEFD-4DB5-90FB-60D607F84393}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Cmd.Infrastructure", "src\Services\Kweet\Kweet.Cmd\Kweet.Infrastructure\Kweet.Cmd.Infrastructure.csproj", "{301DC2A8-0ACA-4A5F-BC52-1D7E7530D743}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CQRS.Core", "src\BuildingBlocks\CQRS.Core\CQRS.Core\CQRS.Core.csproj", "{32299EB8-E67B-4D74-9CB6-D2E5CF835FC6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CQRS.Core", "src\BuildingBlocks\CQRS.Core\CQRS.Core\CQRS.Core.csproj", "{32299EB8-E67B-4D74-9CB6-D2E5CF835FC6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Cmd.Application", "src\Services\Kweet\Kweet.Cmd\Kweet.Cmd.Application\Kweet.Cmd.Application.csproj", "{D612D758-B894-4076-9183-E7B0CAA8C87A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Cmd.Application", "src\Services\Kweet\Kweet.Cmd\Kweet.Cmd.Application\Kweet.Cmd.Application.csproj", "{D612D758-B894-4076-9183-E7B0CAA8C87A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Kweet.Common", "src\Services\Kweet\Kweet.Common\Kweet.Common.csproj", "{2EF6EB4A-3198-447D-B0AE-E0D590AA4A2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.Common", "src\Services\Kweet\Kweet.Common\Kweet.Common.csproj", "{2EF6EB4A-3198-447D-B0AE-E0D590AA4A2E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,10 +101,6 @@ Global
 		{FC5E216D-C642-437A-A863-89F096F833F1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FC5E216D-C642-437A-A863-89F096F833F1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FC5E216D-C642-437A-A863-89F096F833F1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DE761854-DEFD-4DB5-90FB-60D607F84393}.Release|Any CPU.Build.0 = Release|Any CPU
 		{301DC2A8-0ACA-4A5F-BC52-1D7E7530D743}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{301DC2A8-0ACA-4A5F-BC52-1D7E7530D743}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{301DC2A8-0ACA-4A5F-BC52-1D7E7530D743}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -144,7 +138,6 @@ Global
 		{88D40527-6D5E-47CF-AF1D-3AE0E2552210} = {0507842B-1331-4D59-9006-27BA1D60466C}
 		{C67013F5-2EFB-4BE6-A8FF-76BDFD3DBD7C} = {0507842B-1331-4D59-9006-27BA1D60466C}
 		{FC5E216D-C642-437A-A863-89F096F833F1} = {C9083289-9E1B-49D6-9104-F02F18E513DB}
-		{DE761854-DEFD-4DB5-90FB-60D607F84393} = {C9083289-9E1B-49D6-9104-F02F18E513DB}
 		{301DC2A8-0ACA-4A5F-BC52-1D7E7530D743} = {0507842B-1331-4D59-9006-27BA1D60466C}
 		{32299EB8-E67B-4D74-9CB6-D2E5CF835FC6} = {64393D2A-806E-4531-A479-D4E24BB4A97B}
 		{D612D758-B894-4076-9183-E7B0CAA8C87A} = {0507842B-1331-4D59-9006-27BA1D60466C}

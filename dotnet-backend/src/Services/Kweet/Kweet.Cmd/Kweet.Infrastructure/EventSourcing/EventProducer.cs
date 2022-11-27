@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace Kweet.Cmd.Infrastructure.EventSourcing
@@ -19,7 +20,7 @@ namespace Kweet.Cmd.Infrastructure.EventSourcing
             _publish = publish;
         }
 
-        public async Task ProduceAsync<T>(string topic, T @event) where T : BaseEvent
+        public async Task ProduceAsync<KweetCreatedEvent>(string topic, KweetCreatedEvent @event)
         {
             await _publish.Publish(@event);
         }
