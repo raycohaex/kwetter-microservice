@@ -21,7 +21,7 @@ namespace Kweet.Cmd.Infrastructure.EventSourcing
 
         public async Task ProduceAsync<T>(string topic, T @event) where T : BaseEvent
         {
-            // publish event
+            await _publish.Publish(@event);
         }
     }
 }

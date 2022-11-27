@@ -1,11 +1,14 @@
 using CQRS.Core.Domain;
 using CQRS.Core.EventSourcing;
+using Eventbus.Messages.Events;
 using Kweet.Cmd.Application;
 using Kweet.Cmd.Domain.Aggregates;
+using Kweet.Cmd.Domain.Events;
 using Kweet.Cmd.Infrastructure.EventSourcing;
 using Kweet.Cmd.Infrastructure.Repositories;
 using MassTransit;
 using MediatR;
+using MongoDB.Bson.Serialization;
 using System.Reflection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -16,6 +19,9 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+BsonClassMap.RegisterClassMap<BaseEvent>();
+BsonClassMap.RegisterClassMap<KweetCreatedEvent>();
 
 builder.Services.AddApplicationServices();
 
@@ -32,6 +38,7 @@ builder.Services.AddMassTransit(config =>
         //});
     });
 });
+
 
 
 builder.Services.AddScoped<IEventSourcingHandler<KweetAggregate>, EventSourcingHandler>();
