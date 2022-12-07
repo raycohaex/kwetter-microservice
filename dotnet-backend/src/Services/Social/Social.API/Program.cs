@@ -1,3 +1,5 @@
+using Neo4jClient;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,7 +9,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+var client = new BoltGraphClient(new Uri("bolt://localhost:7687"), "neo4j", "develop");
+client.ConnectAsync();
+builder.Services.AddSingleton<IGraphClient>(client);
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
