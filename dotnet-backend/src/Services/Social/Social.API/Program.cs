@@ -1,6 +1,8 @@
 using Neo4jClient;
 using Social.Application.Contracts;
+using Social.Application.Mapper;
 using Social.Application.Services;
+using Social.Infrastructure.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +18,10 @@ client.ConnectAsync();
 
 builder.Services.AddSingleton<IGraphClient>(client);
 
-builder.Services.AddScoped<IFollowService, FollowService>();
+builder.Services.AddAutoMapper(typeof(FollowProfile));
 
+builder.Services.AddScoped<IFollowService, FollowService>();
+builder.Services.AddScoped<IFollowRepository, FollowRepository>();
 
 var app = builder.Build();
 

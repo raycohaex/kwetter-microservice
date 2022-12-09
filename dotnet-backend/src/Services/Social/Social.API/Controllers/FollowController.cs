@@ -15,15 +15,15 @@ namespace Social.API.Controllers
             _followService = followService;
         }
 
-        [HttpPost("{tweetId}")]
+        [HttpPost]
         [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult<UserDto>> CreateUser([FromBody] UserDto user)
+        public async Task<ActionResult> CreateUser([FromBody] UserDto user)
         {
             var result = _followService.CreateUserNode(user);
 
             if (result != null)
             {
-                return Ok(result);
+                return Ok();
             }
 
             return BadRequest();
