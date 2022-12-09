@@ -1,4 +1,6 @@
 using Neo4jClient;
+using Social.Application.Contracts;
+using Social.Application.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,7 +13,11 @@ builder.Services.AddSwaggerGen();
 
 var client = new BoltGraphClient(new Uri("bolt://localhost:7687"), "neo4j", "develop");
 client.ConnectAsync();
+
 builder.Services.AddSingleton<IGraphClient>(client);
+
+builder.Services.AddScoped<IFollowService, FollowService>();
+
 
 var app = builder.Build();
 
