@@ -27,9 +27,17 @@ namespace Social.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task FollowUser(Relation relation)
+        public async Task FollowUser(Relation relation)
         {
-            throw new NotImplementedException();
+            await _client.Cypher
+             .Match("(fr:User {UserName: $fromId}), (to:User {UserName: $toId})")
+             .Create("(fr)-[:FOLLOWS]->(to)")
+             .WithParams(new
+             {
+                 fromId = relation.Follower,
+                 toId = relation.Followee
+             })
+             .ExecuteWithoutResultsAsync();
         }
 
         public Task GetFollowers(User user)

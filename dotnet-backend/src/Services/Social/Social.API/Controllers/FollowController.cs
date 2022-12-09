@@ -16,17 +16,12 @@ namespace Social.API.Controllers
         }
 
         [HttpPost]
-        [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> CreateUser([FromBody] UserDto user)
+        [ProducesResponseType(typeof(RelationDto), (int)HttpStatusCode.OK)]
+        public async Task<ActionResult> CreateRelationship([FromBody] RelationDto relation)
         {
-            var result = _followService.CreateUserNode(user);
+            await _followService.CreateFollowRelation(relation);
 
-            if (result != null)
-            {
-                return Ok();
-            }
-
-            return BadRequest();
+            return Ok();
         }
     }
 }

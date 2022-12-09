@@ -8,8 +8,7 @@ namespace Social.Application.Dto
 {
     public class RelationDto
     {
-        public Guid? Id { get; set; }
-        public Guid? Follower { get; set; }
-        public Guid? Followee { get; set; }
+        public string Follower { get; set; } = null!;
+        public string Followee { get; set; } = null!;
     }
 }

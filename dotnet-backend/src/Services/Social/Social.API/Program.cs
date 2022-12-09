@@ -1,3 +1,4 @@
+using Microsoft.OpenApi.Models;
 using Neo4jClient;
 using Social.Application.Contracts;
 using Social.Application.Mapper;
