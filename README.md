@@ -4,6 +4,15 @@
 # Overview
 This project is a Twitter clone, following the popular microservice architecture. The primary focus will be on functional requirements, so in this repository you will see minimum functional requirements.
 
+# Gateway endpoints
+| Endpoint                            | Upstream HTTP Method | Cache TTL (seconds) | Expected body |
+|-------------------------------------|----------------------|--------------------|----------------|
+| /tweet                              | POST                 | 30                 | JSON: userName, tweetBody |
+| /tweet/{tweetId}                    | GET                  |                     | |
+| /user-timeline/{username}           | GET                  | 30                 | |
+| /social/follow                       | POST                 | 30                 | JSON: follower(username), followee(username)|
+| /social/user                         | POST                 | 30                 | JSON: id(guid), userName|
+
 # Docker
 To spin up all Docker containers locally, run;
 ```docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d```
