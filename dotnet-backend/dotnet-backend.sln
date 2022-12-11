@@ -43,13 +43,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Kweet.IntegrationTests", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Social", "Social", "{FBDC56D2-25DD-4D3C-835A-FF428F6658AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social.API", "src\Services\Social\Social.API\Social.API.csproj", "{32E23CAD-895B-437B-868C-ADD90F282A58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.API", "src\Services\Social\Social.API\Social.API.csproj", "{32E23CAD-895B-437B-868C-ADD90F282A58}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social.Application", "src\Services\Social\Social.Application\Social.Application.csproj", "{5D7944E5-C78F-48CF-A738-D555D5A3220E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Application", "src\Services\Social\Social.Application\Social.Application.csproj", "{5D7944E5-C78F-48CF-A738-D555D5A3220E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social.Domain", "src\Services\Social\Social.Domain\Social.Domain.csproj", "{C97A6894-D70B-43FF-AAB8-D2772119AF78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Domain", "src\Services\Social\Social.Domain\Social.Domain.csproj", "{C97A6894-D70B-43FF-AAB8-D2772119AF78}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Social.Infrastructure", "src\Services\Social\Social.Infrastructure\Social.Infrastructure.csproj", "{0280FC02-9A5C-48BB-91FD-B4B53FCD6C1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Social.Infrastructure", "src\Services\Social\Social.Infrastructure\Social.Infrastructure.csproj", "{0280FC02-9A5C-48BB-91FD-B4B53FCD6C1F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ApiGateway", "ApiGateway", "{2337A4A7-B9EF-4FF5-B929-734BE691DEF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ApiGateway", "src\ApiGateway\ApiGateway\ApiGateway.csproj", "{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -121,6 +125,10 @@ Global
 		{0280FC02-9A5C-48BB-91FD-B4B53FCD6C1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0280FC02-9A5C-48BB-91FD-B4B53FCD6C1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0280FC02-9A5C-48BB-91FD-B4B53FCD6C1F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -146,6 +154,7 @@ Global
 		{5D7944E5-C78F-48CF-A738-D555D5A3220E} = {FBDC56D2-25DD-4D3C-835A-FF428F6658AB}
 		{C97A6894-D70B-43FF-AAB8-D2772119AF78} = {FBDC56D2-25DD-4D3C-835A-FF428F6658AB}
 		{0280FC02-9A5C-48BB-91FD-B4B53FCD6C1F} = {FBDC56D2-25DD-4D3C-835A-FF428F6658AB}
+		{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8} = {2337A4A7-B9EF-4FF5-B929-734BE691DEF7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {453852FF-C494-4E5E-844B-14EA98ED9CB6}
