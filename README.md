@@ -13,7 +13,8 @@ This project is a Twitter clone, following the popular microservice architecture
 | /social/follow                       | POST                 | 30                 | JSON: follower(username), followee(username)|
 | /social/user                         | POST                 | 30                 | JSON: id(guid), userName|
 
-# Docker
+# Install
+## Docker
 To spin up all Docker containers locally, run;
 ```docker-compose -f docker-compose.yml -f docker-compose.override.yml up -d```
 
@@ -22,3 +23,7 @@ To get rid of the containers again, run;
 
 To setup Keycloak after running docker-compose
 ```docker exec local_keycloak /opt/jboss/keycloak/bin/add-user-keycloak.sh -u admin -p admin && docker restart local_keycloak```
+**note:** manually configure Keycloak.
+
+# Architecture overview
+![image](https://user-images.githubusercontent.com/11200658/206924791-c1aa7d65-b7f8-4af7-bb7e-783549c9e957.png)
