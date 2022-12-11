@@ -6,8 +6,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.kweet",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8000"
         }
       ],
       "UpstreamPathTemplate": "/tweet",
@@ -19,8 +19,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.kweet",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8000"
         }
       ],
       "UpstreamPathTemplate": "/tweet/{tweetId}",
@@ -32,8 +32,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.usertimeline",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8001"
         }
       ],
       "UpstreamPathTemplate": "/user-timeline/{username}",
@@ -46,8 +46,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.follow",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8002"
         }
       ],
       "UpstreamPathTemplate": "/social/follow",
@@ -59,8 +59,8 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.follow",
-          "Port": "80"
+          "Host": "localhost",
+          "Port": "8002"
         }
       ],
       "UpstreamPathTemplate": "/social/user",
@@ -69,6 +69,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:80"
+    "BaseUrl": "http://localhost:5010"
   }
 }

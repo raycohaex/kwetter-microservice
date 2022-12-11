@@ -63,6 +63,12 @@ services:
       context: .
       dockerfile: src/Services/Social/Social.API/Dockerfile
 
+  apigateway:
+    image: ${DOCKER_REGISTRY-}apigateway
+    build:
+      context: .
+      dockerfile: src/ApiGateway/ApiGateway/Dockerfile
+
 volumes:
   mysql_data:
   mongo_data:
@@ -70,3 +76,4 @@ volumes:
 
 networks:
   keycloak:
+
