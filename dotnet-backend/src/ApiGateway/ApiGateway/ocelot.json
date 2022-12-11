@@ -26,6 +26,47 @@
       "UpstreamPathTemplate": "/tweet/{tweetId}",
       "UpstreamHttpMethod": [ "GET" ]
     },
+    //User timeline API
+    {
+      "DownstreamPathTemplate": "/api/v1/Timeline/{username}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "8001"
+        }
+      ],
+      "UpstreamPathTemplate": "/user-timeline/{username}",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    //Social API
+    {
+      "DownstreamPathTemplate": "/api/v1/Follow",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "8002"
+        }
+      ],
+      "UpstreamPathTemplate": "/social/follow",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/User",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": "8002"
+        }
+      ],
+      "UpstreamPathTemplate": "/social/user",
+      "UpstreamHttpMethod": [ "POST" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
+    }
   ],
   "GlobalConfiguration": {
     "BaseUrl": "http://localhost:5010"

@@ -57,6 +57,12 @@ services:
       context: .
       dockerfile: src/Services/UserTimeline/UserTimeline.API/Dockerfile
 
+  api.social:
+    image: ${DOCKER_REGISTRY-}socialapi
+    build:
+      context: .
+      dockerfile: src/Services/Social/Social.API/Dockerfile
+
 volumes:
   mysql_data:
   mongo_data:

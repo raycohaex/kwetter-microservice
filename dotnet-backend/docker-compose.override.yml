@@ -26,6 +26,13 @@ services:
     ports:
       - "8001:80"
 
+  api.social:
+    container_name: api.social
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    ports:
+      - "8002:80"
+
   db.kweet:
     container_name: db.kweet
     environment:
@@ -68,3 +75,4 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
+
