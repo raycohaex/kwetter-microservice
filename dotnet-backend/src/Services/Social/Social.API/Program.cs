@@ -14,7 +14,17 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var client = new BoltGraphClient(new Uri("bolt://localhost:7687"), "neo4j", "develop");
+var server = builder.Configuration.GetValue<string>("neo4j:server");
+var username = builder.Configuration.GetValue<string>("neo4j:username");
+var password = builder.Configuration.GetValue<string>("neo4j:password");
+
+var client = new BoltGraphClient(
+    new Uri(server),
+    username,
+    password
+);
+
+
 client.ConnectAsync();
 
 builder.Services.AddSingleton<IGraphClient>(client);

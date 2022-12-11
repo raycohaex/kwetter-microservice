@@ -30,6 +30,9 @@ services:
     container_name: api.social
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
+      - "neo4j:server=bolt://db.neo4j:7687"
+      - "neo4j:username=neo4j"
+      - "neo4j:password=develop"
     ports:
       - "8002:80"
 
