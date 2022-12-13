@@ -34,7 +34,7 @@ services:
       KEYCLOAK_PASSWORD: admin
     image: jboss/keycloak:latest
     ports:
-      - "28080:8080"
+      - "8080:8080"
     restart: unless-stopped
     networks:
       - keycloak

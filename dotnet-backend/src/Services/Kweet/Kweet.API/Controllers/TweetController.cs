@@ -7,6 +7,8 @@ using Kweet.Application.Features.Commands.PostKweet;
 using Eventbus.Messages.Events;
 using AutoMapper;
 using MassTransit;
+using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace Kweet.API.Controllers
 {
@@ -34,10 +36,19 @@ namespace Kweet.API.Controllers
             return Ok(kweet);
         }
 
+        [Authorize]
         [HttpPost]
         [ProducesResponseType((int)HttpStatusCode.OK)]
         public async Task<ActionResult<Guid>> PostKweet([FromBody] PostKweetCommand command)
         {
+
+            var user = User;
+
+            // Get the username from the user's claims
+            var usernameClaim = user.FindFirst("preferred_username");
+
+            command.UserName = usernameClaim.Value;
+
             var result = await _mediator.Send(command);
 
             // The post command returns an entity,
