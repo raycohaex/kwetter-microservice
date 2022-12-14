@@ -1,12 +1,9 @@
 <script>
   import svelteLogo from './assets/svelte.svg'
   import Counter from './lib/Counter.svelte'
-  import TailwindCss from './TailwindCSS.svelte';
 </script>
 
-<TailwindCss />
-
-<main>
+<main class="bg-slate-900">
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer"> 
       <img src="/vite.svg" class="logo" alt="Vite Logo" />

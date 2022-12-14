@@ -3,7 +3,10 @@ export default {
     theme: {
     extend: {},
   },
-  purge: ["./index.html",'./src/**/*.{svelte,js,ts}'], // for unused CSS
+  purge: {
+    enabled: true,
+    content: ["./index.html",'./src/**/*.{svelte,js,ts}']
+  }, // for unused CSS
   variants: {
     extend: {},
   },
