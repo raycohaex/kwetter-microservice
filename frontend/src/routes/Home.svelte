@@ -1,15 +1,16 @@
 <script>
-    // import the keycloak.js keycloak which is in the root of src
-    import keycloak from '../keycloak.js';
-    import { Api } from '../api.js';
+import keycloak from '../keycloak.js';
+import { Api } from '../api.js';
+import Axios from 'axios';
 
-    let pageName="Home Page";
+let pageName="Home Page";
 
-// get bearer token from keycloak-js
-const token = keycloak.token;
 
-const api = new Api('http://localhost:5138/', {
-  'Authorization': `Bearer ${token}`,
+
+const api = new Api('http://localhost:8000/', {
+    headers: {
+        Authorization: `Bearer ${keycloak.token}`
+    }
 });
 
 async function getData() {
@@ -19,29 +20,27 @@ async function getData() {
 getData();
 </script>
 
-<main>
-    <h1> {pageName}!</h1>
-    <p>Welcome this is my <b>{pageName}</b></p>
+<main class="flex flex-col">
+    <div class="py-8 px-[50px] border-b border-gray-100">
+        <h1 class="font-bold text-2xl">Startpagina</h1>
+        ...
+    </div>
+    <!-- list of tweets -->
+    <div>
+        <!-- make a svelte foreach that does 8 iterations -->
+        {#each [1,2,3,4,5,6,7,8] as tweet}
+        <div class="py-8 px-[50px] border-b border-gray-100 flex">
+            <div class="skeleton rounded-full w-12 h-12 mr-4"></div>
+            <div class="flex-1">
+            <div class="flex justify-between">
+                <div class="text-gray-500 skeleton w-1/2 h-6 mb-5"></div>
+            </div>
+            <div class="text-gray-500 skeleton w-full h-14"></div>
+            </div>
+        </div>
+        {/each}
+    </div>
 </main>
 
 <style>
-    main {
-        text-align: center;
-        padding: 1em;
-        max-width: 240px;
-        margin: 0 auto;
-    }
-
-    h1 {
-        color: #ff3e00;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
-    }
-
-    @media (min-width: 640px) {
-        main {
-            max-width: none;
-        }
-    }
 </style>

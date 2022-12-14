@@ -1,15 +1,21 @@
 import axios from 'axios';
 
+
 export class Api {
     constructor(baseUrl, headers = {}) {
       this.client = axios.create({
         baseURL: baseUrl,
-        headers: headers
+        // add content-type header to every request
+        headers: {
+            'Content-Type': 'application/json',
+            ...headers
+        }
       });
     }
   
-    get(url, config = {}) {
-      return this.client.get(url, config);
+    async get(url, config = {}) {
+
+      return await this.client.get(url, config);
     }
   
     post(url, data, config = {}) {
