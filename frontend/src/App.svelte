@@ -7,7 +7,7 @@
   import { onMount } from 'svelte';
   
   export let url = ""; //This property is necessary declare to avoid ignore the Router
-  let preferredUsername;
+  export let preferredUsername;
   // the code below gives a 401 error, how to fix it? 
 
   keycloak
@@ -45,7 +45,7 @@
       <div class="col-span-3">
 
         <Route path="/"><Home /></Route>
-        <Route path="profile"><Profile /></Route>
+        <Route path="/profile/:username" let:params><Profile username={params.username} /></Route>
 
       </div>
 

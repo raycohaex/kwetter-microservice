@@ -7,14 +7,14 @@ let pageName="Home Page";
 
 
 
-const api = new Api('http://localhost:8000/', {
+const api = new Api('http://localhost:5133/', {
     headers: {
         Authorization: `Bearer ${keycloak.token}`
     }
 });
 
 async function getData() {
-  const data = await api.get('api/v1/Tweet/08dad221-95d2-4df7-80ac-06f5f689a28e').then(res => console.log(res)).catch(err => console.log(err));
+  const data = await api.get('tweet/08dad221-95d2-4df7-80ac-06f5f689a28e').then(res => console.log(res)).catch(err => console.log(err));
 }
 
 getData();

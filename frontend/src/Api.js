@@ -1,14 +1,13 @@
 import axios from 'axios';
-
+import keycloak from './keycloak.js';
 
 export class Api {
-    constructor(baseUrl, headers = {}) {
+    constructor(baseUrl, extraHeaders = {}) {
       this.client = axios.create({
         baseURL: baseUrl,
         // add content-type header to every request
         headers: {
-            'Content-Type': 'application/json',
-            ...headers
+            'Content-Type': 'application/json'
         }
       });
     }
