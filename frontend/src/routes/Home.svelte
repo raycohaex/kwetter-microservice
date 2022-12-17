@@ -1,29 +1,28 @@
 <script>
 import keycloak from '../keycloak.js';
-import { Api } from '../api.js';
-import Axios from 'axios';
+import { client } from '../Api.js';
+import axios from 'axios';
+import WriteTweet from '../components/WriteTweet.svelte';
+import { onMount } from 'svelte';
+import { once } from 'svelte/internal';
 
-let pageName="Home Page";
+let test;
 
+onMount(async () => {
+    client.get(`tweet/08dad221-95d2-4df7-80ac-06f5f689a28e`).then(res => test = res).catch(err => console.log(err));
 
-
-const api = new Api('http://localhost:5133/', {
-    headers: {
-        Authorization: `Bearer ${keycloak.token}`
-    }
+    // wait for data to be fetched then console log
 });
 
-async function getData() {
-  const data = await api.get('tweet/08dad221-95d2-4df7-80ac-06f5f689a28e').then(res => console.log(res)).catch(err => console.log(err));
+$: if (test) {
+    console.log(test);
 }
-
-getData();
 </script>
 
 <main class="flex flex-col">
     <div class="py-8 px-[50px] border-b border-gray-100">
         <h1 class="font-bold text-2xl">Startpagina</h1>
-        ...
+        <WriteTweet />
     </div>
     <!-- list of tweets -->
     <div>

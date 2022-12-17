@@ -24,7 +24,8 @@
         }
       ],
       "UpstreamPathTemplate": "/tweet/{tweetId}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
     },
     //User timeline API
     {

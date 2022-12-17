@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // add keycloak
-builder.Services.AddKeycloakAuthentication(builder.Configuration, KeycloakAuthenticationOptions.Section);
+builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
 // Only configure a host since this service will only emit.
 builder.Services.AddMassTransit(config =>

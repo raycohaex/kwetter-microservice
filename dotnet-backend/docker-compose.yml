@@ -3,12 +3,18 @@ version: '3.4'
 services:
   db.kweet:
     image: mysql
+    networks:
+      - app
 
   db.usertimeline:
     image: mongo
+    networks:
+      - app
 
   cache.usertimeline:
     image: redis:alpine
+    networks:
+      - app
 
   db.auth:
     image: postgres:13.2
@@ -19,11 +25,12 @@ services:
       POSTGRES_PASSWORD: keycloak
     networks:
       - keycloak
+      - app
 
   keycloak:
     depends_on:
       - db.auth
-    container_name: local_keycloak
+    container_name: keycloak
     environment:
       DB_VENDOR: postgres
       DB_ADDR: db.auth
@@ -38,36 +45,49 @@ services:
     restart: unless-stopped
     networks:
       - keycloak
+      - app
 
   service.rabbitmq:
     image: rabbitmq:3-management-alpine
+    networks:
+      - app
 
   db.neo4j:
     image: neo4j
+    networks:
+      - app
 
   api.kweet:
     image: ${DOCKER_REGISTRY-}kweetapi
     build:
       context: .
       dockerfile: src/Services/Kweet/Kweet.API/Dockerfile
+    networks:
+      - app
 
   api.usertimeline:
     image: ${DOCKER_REGISTRY-}usertimelineapi
     build:
       context: .
       dockerfile: src/Services/UserTimeline/UserTimeline.API/Dockerfile
+    networks:
+      - app
 
   api.social:
     image: ${DOCKER_REGISTRY-}socialapi
     build:
       context: .
       dockerfile: src/Services/Social/Social.API/Dockerfile
+    networks:
+      - app
 
   apigateway:
     image: ${DOCKER_REGISTRY-}apigateway
     build:
       context: .
       dockerfile: src/ApiGateway/ApiGateway/Dockerfile
+    networks:
+      - app
 
 volumes:
   mysql_data:
@@ -76,4 +96,4 @@ volumes:
 
 networks:
   keycloak:
-
+  app:

@@ -1,8 +1,8 @@
 import Keycloak from 'keycloak-js';
 
 let keycloak = Keycloak({
-    url: "http://localhost:8080/auth",
-    realm: "kwetter",
+    url: "http://172.22.192.1:8080/auth",
+    realm: "master",
     clientId: "kwetter-frontend"
   });
 

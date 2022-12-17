@@ -1,6 +1,6 @@
 <script>
 import keycloak from '../keycloak.js';
-import { Api } from '../Api.js';
+import { client } from '../Api.js';
 import Axios from 'axios';
 import { onMount } from 'svelte';
 import { Router, Link, Route } from "svelte-routing";
@@ -10,10 +10,9 @@ export let username;
 let tweets = [];
 
 onMount(async () => {
-    const api = new Api('http://localhost/');
     claims = keycloak.tokenParsed;
     
-    await api.get(`user-timeline/${username}`).then(res => tweets = res.data.items).catch(err => console.log(err));
+    client.get(`user-timeline/${username}`).then(res => tweets = res.data.items).catch(err => console.log(err));
     console.log(tweets);
 });
     

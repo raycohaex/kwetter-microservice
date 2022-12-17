@@ -1,12 +1,15 @@
 version: '3.4'
 
+
 services:
   api.kweet:
     container_name: api.kweet
-    environment:
+    environment: 
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:KweetDbConnectionString=server=db.kweet;database=KweetDb;user=development;password=development"
       - "EventBusSettings:HostAddress=amqp://guest:guest@service.rabbitmq:5672"
+      - "Keycloak:auth-server-url=http://172.22.192.1:8080/auth/"
+
     depends_on:
         - db.kweet
         - service.rabbitmq
