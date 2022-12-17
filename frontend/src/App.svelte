@@ -5,6 +5,7 @@
   import keycloak from "./keycloak.js";
   import Dashboard from "./layout/Dashboard.svelte";
   import { onMount } from 'svelte';
+    import ProfileSelf from "./routes/ProfileSelf.svelte";
   
   export let url = ""; //This property is necessary declare to avoid ignore the Router
   export let preferredUsername;
@@ -27,7 +28,6 @@
 
 <!-- basic tailwind layout which has a container and a grid with 3 columns -->
 
-
 <main class="container max-w-[1200px] mx-auto text-sm min-h-screen">
   <Router url="{url}">
     <div class="mx-auto grid grid-cols-5 min-h-screen">
@@ -46,12 +46,15 @@
 
         <Route path="/"><Home /></Route>
         <Route path="/profile/:username" let:params><Profile username={params.username} /></Route>
+        {#if preferredUsername !== undefined}
+        <Route path={"/profile/" + preferredUsername}><ProfileSelf username={preferredUsername} /></Route>
+        {/if}
 
       </div>
 
       <div class="col-span-1 border-l-2 border-gray-100">
         <div class="px-7 pt-[80px]">
-          <h2>trending ofzo</h2>
+          <h2 class="font-bold text-xl">Trending</h2>
         </div>
       </div>
     </div>
