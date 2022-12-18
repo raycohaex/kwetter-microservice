@@ -11,7 +11,7 @@
         }
       ],
       "UpstreamPathTemplate": "/tweet",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
     {
@@ -24,7 +24,7 @@
         }
       ],
       "UpstreamPathTemplate": "/tweet/{tweetId}",
-      "UpstreamHttpMethod": [ "GET" ]
+      "UpstreamHttpMethod": [ "GET" ],
     },
     //User timeline API
     {
@@ -69,6 +69,6 @@
     }
   ],
   "GlobalConfiguration": {
-    "BaseUrl": "http://localhost:5010"
+    "BaseUrl": "http://localhost:5133"
   }
 }

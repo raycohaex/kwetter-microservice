@@ -88,4 +88,6 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
     ports:
       - "80:80"
+    depends_on:
+      - api.kweet
 

@@ -11,7 +11,7 @@
         }
       ],
       "UpstreamPathTemplate": "/tweet",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
     {

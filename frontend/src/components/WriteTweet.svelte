@@ -19,8 +19,12 @@
         const token = keycloak.token;
         console.log()
 
+
+        // send kweet to backend through ocelot gateway using keyclaok token as bearer token and avoiding cors
+        // also set credentials to true to allow cookies to be sent
+        
         axios({
-            method: 'post',
+            method: 'POST',
             url: `http://localhost/tweet`,
             withCredentials: false,
             data: {
@@ -30,6 +34,10 @@
             headers: {
                 Authorization: `Bearer ${token}`
             }
+        }).then((response) => {
+            console.log(response);
+        }).catch((error) => {
+            console.log(error);
         });
     }
 
