@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Eventbus.Messages.Events;
 using Kweet.Application.Contracts.Persistence;
 using Kweet.Domain.Entities;
 using MassTransit;
@@ -17,13 +18,13 @@ namespace Kweet.Application.Features.Commands.PostKweet
         private readonly IKweetRepository _kweetRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<PostKweetCommandHandler> _logger;
-        private readonly IBus _bus;
+        private readonly IPublishEndpoint _pubEndpoint;
 
-        public PostKweetCommandHandler(IKweetRepository kweetRepository, IMapper mapper, ILogger<PostKweetCommandHandler> logger, IBus bus)
+        public PostKweetCommandHandler(IKweetRepository kweetRepository, IMapper mapper, ILogger<PostKweetCommandHandler> logger, IPublishEndpoint bus)
         {
             _kweetRepository = kweetRepository;
             _mapper = mapper;
-            _bus = bus;
+            _pubEndpoint = bus;
             _logger = logger;
         }
 
@@ -36,6 +37,13 @@ namespace Kweet.Application.Features.Commands.PostKweet
                 kweetEntity.CreatedBy = "TO_BE_IMPLEMENTED";
                 kweetEntity.CreatedOn = DateTime.Now;
                 var newKweet = await _kweetRepository.AddAsync(kweetEntity);
+
+                if (newKweet != null)
+                {
+                    var eventMessage = _mapper.Map<KweetPostedEvent>(newKweet);
+                    await _pubEndpoint.Publish(eventMessage);
+                }
+
                 return newKweet;
             }
             catch (Exception ex)
