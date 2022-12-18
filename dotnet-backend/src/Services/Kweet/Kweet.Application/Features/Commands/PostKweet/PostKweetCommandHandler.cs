@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Kweet.Application.Contracts.Persistence;
 using Kweet.Domain.Entities;
+using MassTransit;
 using MediatR;
 using Microsoft.Extensions.Logging;
 using System;
@@ -16,11 +17,13 @@ namespace Kweet.Application.Features.Commands.PostKweet
         private readonly IKweetRepository _kweetRepository;
         private readonly IMapper _mapper;
         private readonly ILogger<PostKweetCommandHandler> _logger;
+        private readonly IBus _bus;
 
-        public PostKweetCommandHandler(IKweetRepository kweetRepository, IMapper mapper, ILogger<PostKweetCommandHandler> logger)
+        public PostKweetCommandHandler(IKweetRepository kweetRepository, IMapper mapper, ILogger<PostKweetCommandHandler> logger, IBus bus)
         {
             _kweetRepository = kweetRepository;
             _mapper = mapper;
+            _bus = bus;
             _logger = logger;
         }
 

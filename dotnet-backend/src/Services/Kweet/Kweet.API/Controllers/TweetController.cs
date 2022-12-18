@@ -19,14 +19,12 @@ namespace Kweet.API.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IMapper _mapper;
-        private readonly IPublishEndpoint _publish;
         private readonly ILogger<TweetController> _logger;
 
-        public TweetController(IMediator mediator, IMapper mapper, IPublishEndpoint publish, ILogger<TweetController> logger)
+        public TweetController(IMediator mediator, IMapper mapper,  ILogger<TweetController> logger)
         {
             _mapper = mapper;
             _mediator = mediator;
-            _publish = publish;
             _logger = logger;
         }
 
@@ -53,12 +51,6 @@ namespace Kweet.API.Controllers
                 command.UserName = usernameClaim.Value;
 
                 var result = await _mediator.Send(command);
-
-                // The post command returns an entity,
-                // I map it to an event and send it to MQ
-                var eventMessage = _mapper.Map<KweetPostedEvent>(result);
-                await _publish.Publish(eventMessage);
-
                 return Ok(result);
             }
             catch(Exception e)
