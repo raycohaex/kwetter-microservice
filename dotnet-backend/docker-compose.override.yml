@@ -36,6 +36,7 @@ services:
       - "neo4j:server=bolt://db.neo4j:7687"
       - "neo4j:username=neo4j"
       - "neo4j:password=develop"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@service.rabbitmq:5672"
     ports:
       - "8002:80"
 

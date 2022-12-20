@@ -34,5 +34,25 @@ namespace Social.Application.Services
             await _followRepository.CreateUserNode(_user);
             return user;
         }
+
+        public async Task<IEnumerable<UserDto>> GetFollowers(Guid id)
+        {
+            var users = await _followRepository.GetFollowers(id);
+            var usersdto = _mapper.Map<IEnumerable<UserDto>>(users);
+            return usersdto;
+        }
+
+        public async Task<Dictionary<string, long>> GetUserSocialStats(string userName)
+        {
+            var followingcount = await _followRepository.GetFollowingCount(userName);
+            var followerscount = await _followRepository.GetFollowersCount(userName);
+
+            var dict = new Dictionary<string, long>();
+
+            dict.Add("followers", followerscount);
+            dict.Add("following", followingcount);
+
+            return dict;
+        }
     }
 }

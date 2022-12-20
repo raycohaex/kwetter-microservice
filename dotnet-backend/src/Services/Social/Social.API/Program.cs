@@ -1,5 +1,8 @@
+using Eventbus.Messages.Common;
+using MassTransit;
 using Microsoft.OpenApi.Models;
 using Neo4jClient;
+using Social.API.EventBusConsumer;
 using Social.Application.Contracts;
 using Social.Application.Mapper;
 using Social.Application.Services;
@@ -23,6 +26,20 @@ var client = new BoltGraphClient(
     username,
     password
 );
+
+builder.Services.AddMassTransit(config =>
+{
+    config.AddConsumer<RequestFollowersConsumer>();
+
+    config.UsingRabbitMq((ctx, cfg) =>
+    {
+        cfg.Host(builder.Configuration["EventBusSettings:HostAddress"]);
+        cfg.ReceiveEndpoint(EventBusConstants.GetRequestFollowersConsumer, c =>
+        {
+            c.ConfigureConsumer<RequestFollowersConsumer>(ctx);
+        });
+    });
+});
 
 builder.Services.AddCors(options =>
 {

@@ -1,4 +1,5 @@
 using Eventbus.Messages.Common;
+using Eventbus.Messages.Events.Integration.GetFollowers;
 using HomeTimeline.API.EventBusConsumer;
 using MassTransit;
 using Microsoft.OpenApi.Models;
@@ -24,6 +25,8 @@ builder.Services.AddMassTransit(config =>
             c.ConfigureConsumer<KweetPostedConsumer>(ctx);
         });
     });
+
+    config.AddRequestClient<GetFollowersRequest>();
 });
 
 builder.Services.AddSwaggerGen(options => {

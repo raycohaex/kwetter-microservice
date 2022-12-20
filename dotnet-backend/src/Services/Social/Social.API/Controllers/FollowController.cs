@@ -23,5 +23,12 @@ namespace Social.API.Controllers
 
             return Ok();
         }
+
+        [HttpGet("{username}")]
+        public async Task<ActionResult<Dictionary<string, long>>> GetUserSocialStats(string username)
+        {
+            var followers = await _followService.GetUserSocialStats(username);
+            return Ok(followers);
+        }
     }
 }

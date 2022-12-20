@@ -1,10 +1,12 @@
 ﻿using Neo4jClient;
+using Neo4jClient.Cypher;
 using Social.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace Social.Infrastructure.Repositories
 {
@@ -27,6 +29,11 @@ namespace Social.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
+        public Task FindUserNode(Guid userId)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task FollowUser(Relation relation)
         {
             await _client.Cypher
@@ -40,9 +47,36 @@ namespace Social.Infrastructure.Repositories
              .ExecuteWithoutResultsAsync();
         }
 
-        public Task GetFollowers(User user)
+        public async Task<IEnumerable<User>> GetFollowers(Guid user)
         {
-            throw new NotImplementedException();
+            var followers = _client.Cypher
+                .Match("(user:User {name: {userName}})<-[:FOLLOWS]-(follower:User)")
+                .WithParam("userName", user)
+                .Return(follower => follower.As<User>());
+
+            return await followers.ResultsAsync;
+        }
+
+        public async Task<long> GetFollowingCount(string userName)
+        {
+            var query = _client.Cypher
+                .Match(@"(user:User {UserName: $userName})-[relation:FOLLOWS]->()")
+                .WithParam("userName", userName)
+                .Return((relation) => relation.Count());
+
+            var result = await query.ResultsAsync;
+            return result.Single();
+        }
+
+        public async Task<long> GetFollowersCount(string userName)
+        {
+            var query = _client.Cypher
+                .Match(@"(user:User {UserName: $userName})<-[relation:FOLLOWS]-()")
+                .WithParam("userName", userName)
+                .Return((relation) => relation.Count());
+
+            var result = await query.ResultsAsync;
+            return result.Single();
         }
     }
 }

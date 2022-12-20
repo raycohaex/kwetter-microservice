@@ -10,8 +10,11 @@ namespace Social.Infrastructure.Repositories
     public interface IFollowRepository
     {
         Task CreateUserNode(User user);
+        Task FindUserNode(Guid userId);
         Task DeleteUserNode(User user);
         Task FollowUser(Relation relation);
-        Task GetFollowers(User user);
+        Task<IEnumerable<User>> GetFollowers(Guid user);
+        Task<long> GetFollowersCount(string userName);
+        Task<long> GetFollowingCount(string userName);
     }
 }
