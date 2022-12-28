@@ -19,20 +19,16 @@ namespace Social.API.EventBusConsumer
 
         public async Task Consume(ConsumeContext<GetFollowersRequest> context)
         {
-            // use different kweet entity
-            _logger.Log(LogLevel.Information, $"request received {context.Message}");
+            var isCeleb = false;
 
-            //_followRepository.GetFollowers();
+            var result = await _followRepository.GetFollowers(context.Message.UserId);
+            var followers = result.Select(f => f.UserName).ToList();
 
             await context.RespondAsync<GetFollowersResponse>(new GetFollowersResponse
             {
                 UserId = context.Message.UserId,
-                Followers = new List<Guid>
-                {
-                    new Guid(),
-                    new Guid(),
-                    new Guid(),
-                }
+                Followers = followers,
+                IsCeleb = isCeleb
             });
         }
     }

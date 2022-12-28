@@ -9,7 +9,8 @@ namespace Eventbus.Messages.Events.Integration.GetFollowers
     public class GetFollowersResponse
     {
         public Guid UserId { get; set; }
-        public List<Guid>? Followers { get; set; }
+        public List<string>? Followers { get; set; }
+        public bool IsCeleb { get; set; }
 
     }
 }

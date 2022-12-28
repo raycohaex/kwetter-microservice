@@ -13,6 +13,8 @@ namespace Social.Application.Services
 {
     public class FollowService : IFollowService
     {
+        public const string FOLLOWERS = "followers";
+        public const string FOLLOWING = "following";
         private readonly IFollowRepository _followRepository;
         private readonly IMapper _mapper;
 
@@ -49,8 +51,8 @@ namespace Social.Application.Services
 
             var dict = new Dictionary<string, long>();
 
-            dict.Add("followers", followerscount);
-            dict.Add("following", followingcount);
+            dict.Add(FOLLOWERS, followerscount);
+            dict.Add(FOLLOWING, followingcount);
 
             return dict;
         }
