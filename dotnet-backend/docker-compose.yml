@@ -39,7 +39,19 @@ services:
       DB_PASSWORD: keycloak
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
-    image: jboss/keycloak:latest
+      KK_TO_RMQ_URL: 172.30.0.8
+      KK_TO_RMQ_PORT: 5672
+      KK_TO_RMQ_VHOST: '/'
+      KK_TO_RMQ_EXCHANGE: 'amq.topic'
+      KK_TO_RMQ_USERNAME: 'guest'
+      KK_TO_RMQ_PASSWORD: 'guest'
+      KK_TO_RMQ_USE_TLS: 'false'
+      #KEYCLOAK_IMPORT: src/Services/Auth/realm-export.json
+
+    image: ${DOCKER_REGISTRY-}keycloak-rabbitmq
+    build:
+      context: .
+      dockerfile: src/Services/Auth/Dockerfile.local
     ports:
       - "8080:8080"
     restart: unless-stopped

@@ -1,0 +1,6 @@
+FROM jboss/keycloak
+
+COPY ["src/Services/Auth/keycloak-to-rabbit-3.0.2.jar", "opt/jboss/keycloak/standalone/deployments/"]
+COPY ["src/Services/Auth/realm-export.json", "opt/jboss/keycloak/"]
+
+#RUN /opt/jboss/keycloak/bin/jboss-keycloak.sh import-realm /opt/jboss/keycloak/realm-export.json
