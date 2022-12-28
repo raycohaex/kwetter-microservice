@@ -1,5 +1,6 @@
 using Eventbus.Messages.Common;
 using MassTransit;
+using MassTransit.Transports.Fabric;
 using Microsoft.OpenApi.Models;
 using Neo4jClient;
 using Social.API.EventBusConsumer;
@@ -30,6 +31,7 @@ var client = new BoltGraphClient(
 builder.Services.AddMassTransit(config =>
 {
     config.AddConsumer<RequestFollowersConsumer>();
+    config.AddConsumer<RegisterEventConsumer>();
 
     config.UsingRabbitMq((ctx, cfg) =>
     {
@@ -37,6 +39,19 @@ builder.Services.AddMassTransit(config =>
         cfg.ReceiveEndpoint(EventBusConstants.GetRequestFollowersConsumer, c =>
         {
             c.ConfigureConsumer<RequestFollowersConsumer>(ctx);
+        });
+
+        cfg.ReceiveEndpoint("register-events", e =>
+        {
+            e.Bind("amq.topic", x =>
+            {
+                //	KK.EVENT.CLIENT.master.SUCCESS.kwetter-frontend.REGISTER
+                x.RoutingKey = "KK.EVENT.#";
+                x.ExchangeType = "topic";
+                }
+            ) ;
+
+            e.ConfigureConsumer<RegisterEventConsumer>(ctx);
         });
     });
 });
