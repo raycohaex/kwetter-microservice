@@ -47,11 +47,11 @@ namespace Social.Infrastructure.Repositories
              .ExecuteWithoutResultsAsync();
         }
 
-        public async Task<IEnumerable<User>> GetFollowers(Guid user)
+        public async Task<IEnumerable<User>> GetFollowers(string username)
         {
             var followers = _client.Cypher
-                .Match("(user:User {name: {userName}})<-[:FOLLOWS]-(follower:User)")
-                .WithParam("userName", user)
+                .Match(@"(user:User {UserName: $username})<-[:FOLLOWS]-(follower:User)")
+                .WithParam("username", username)
                 .Return(follower => follower.As<User>());
 
             return await followers.ResultsAsync;

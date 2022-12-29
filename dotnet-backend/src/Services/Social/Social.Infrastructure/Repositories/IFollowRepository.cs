@@ -13,7 +13,7 @@ namespace Social.Infrastructure.Repositories
         Task FindUserNode(Guid userId);
         Task DeleteUserNode(User user);
         Task FollowUser(Relation relation);
-        Task<IEnumerable<User>> GetFollowers(Guid user);
+        Task<IEnumerable<User>> GetFollowers(string username);
         Task<long> GetFollowersCount(string userName);
         Task<long> GetFollowingCount(string userName);
     }

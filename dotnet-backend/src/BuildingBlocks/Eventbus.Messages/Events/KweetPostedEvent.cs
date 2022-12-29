@@ -15,7 +15,7 @@ namespace Eventbus.Messages.Events
         public DateTime? UpdatedOn { get; set; }
 
         // Kweet content
-        public string UserName { get; set; }
-        public string TweetBody { get; set; }
+        public string UserName { get; set; } = null!;
+        public string TweetBody { get; set; } = null!;
     }
 }

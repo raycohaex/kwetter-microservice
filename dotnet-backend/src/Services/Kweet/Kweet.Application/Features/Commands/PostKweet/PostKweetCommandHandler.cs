@@ -41,6 +41,7 @@ namespace Kweet.Application.Features.Commands.PostKweet
                 if (newKweet != null)
                 {
                     var eventMessage = _mapper.Map<KweetPostedEvent>(newKweet);
+                    _logger.LogInformation($"sending kweet {eventMessage} with username {eventMessage.UserName}");
                     await _pubEndpoint.Publish(eventMessage);
                 }
 

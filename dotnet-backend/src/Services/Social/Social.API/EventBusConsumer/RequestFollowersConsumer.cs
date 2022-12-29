@@ -19,14 +19,16 @@ namespace Social.API.EventBusConsumer
 
         public async Task Consume(ConsumeContext<GetFollowersRequest> context)
         {
+            _logger.LogInformation("processing");
             var isCeleb = false;
 
-            var result = await _followRepository.GetFollowers(context.Message.UserId);
+            var result = await _followRepository.GetFollowers(context.Message.UserName);
             var followers = result.Select(f => f.UserName).ToList();
 
             await context.RespondAsync<GetFollowersResponse>(new GetFollowersResponse
             {
                 UserId = context.Message.UserId,
+                UserName = context.Message.UserName,
                 Followers = followers,
                 IsCeleb = isCeleb
             });

@@ -10,6 +10,7 @@ using MassTransit;
 using Microsoft.AspNetCore.Authorization;
 using System.Security.Claims;
 using Microsoft.Extensions.Logging;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace Kweet.API.Controllers
 {
@@ -46,9 +47,9 @@ namespace Kweet.API.Controllers
                 var user = User;
 
                 // Get the username from the user's claims
-                var usernameClaim = user.FindFirst("preferred_username");
+                var usernameClaim = user.Identity.Name;
 
-                command.UserName = usernameClaim.Value;
+                command.UserName = usernameClaim;
 
                 var result = await _mediator.Send(command);
                 return Ok(result);

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Social.Application.Contracts;
 using Social.Application.Dto;
 using Social.Domain.Entities;
@@ -17,11 +18,13 @@ namespace Social.Application.Services
         public const string FOLLOWING = "following";
         private readonly IFollowRepository _followRepository;
         private readonly IMapper _mapper;
+        private readonly ILogger<FollowService> _logger;
 
-        public FollowService(IFollowRepository followRepository, IMapper mapper)
+        public FollowService(IFollowRepository followRepository, IMapper mapper, ILogger<FollowService> logger)
         {
             _followRepository = followRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public async Task CreateFollowRelation(RelationDto relation)
@@ -37,9 +40,10 @@ namespace Social.Application.Services
             return user;
         }
 
-        public async Task<IEnumerable<UserDto>> GetFollowers(Guid id)
+        public async Task<IEnumerable<UserDto>> GetFollowers(string username)
         {
-            var users = await _followRepository.GetFollowers(id);
+            _logger.LogInformation($"Getting followers for {username}");
+            var users = await _followRepository.GetFollowers(username);
             var usersdto = _mapper.Map<IEnumerable<UserDto>>(users);
             return usersdto;
         }

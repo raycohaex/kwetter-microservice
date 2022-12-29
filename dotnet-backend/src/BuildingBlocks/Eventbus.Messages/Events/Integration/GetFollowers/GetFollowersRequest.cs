@@ -9,5 +9,6 @@ namespace Eventbus.Messages.Events.Integration.GetFollowers
     public class GetFollowersRequest
     {
         public Guid UserId { get; set; }
+        public string UserName { get; set; }
     }
 }

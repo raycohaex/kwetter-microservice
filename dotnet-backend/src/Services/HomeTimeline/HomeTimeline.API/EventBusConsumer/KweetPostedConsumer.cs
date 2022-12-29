@@ -23,7 +23,7 @@ namespace HomeTimeline.API.EventBusConsumer
             // use different kweet entity
             _logger.Log(LogLevel.Information, $"kweet received {context.Message}");
 
-            var response = await _client.GetResponse<GetFollowersResponse>(new { UserId = context.Message.Id});
+            var response = await _client.GetResponse<GetFollowersResponse>(new { UserId = context.Message.Id, UserName = context.Message.UserName});
 
             var followers = response.Message.Followers;
             var followersString = "[" + string.Join(",", followers.Select(f => f.ToString())) + "]";

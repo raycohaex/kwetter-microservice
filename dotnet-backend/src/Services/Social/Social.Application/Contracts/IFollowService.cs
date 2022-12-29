@@ -11,7 +11,7 @@ namespace Social.Application.Contracts
     {
         Task<UserDto> CreateUserNode(UserDto user);
         Task CreateFollowRelation(RelationDto relation);
-        Task<IEnumerable<UserDto>> GetFollowers(Guid id);
+        Task<IEnumerable<UserDto>> GetFollowers(string username);
         Task<Dictionary<string, long>> GetUserSocialStats(string userId);
     }
 }
