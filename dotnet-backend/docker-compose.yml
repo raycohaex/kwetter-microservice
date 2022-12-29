@@ -39,7 +39,7 @@ services:
       DB_PASSWORD: keycloak
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: admin
-      KK_TO_RMQ_URL: 172.30.0.8
+      KK_TO_RMQ_URL: service.rabbitmq
       KK_TO_RMQ_PORT: 5672
       KK_TO_RMQ_VHOST: '/'
       KK_TO_RMQ_EXCHANGE: 'amq.topic'

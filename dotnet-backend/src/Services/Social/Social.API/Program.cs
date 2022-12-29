@@ -43,10 +43,11 @@ builder.Services.AddMassTransit(config =>
 
         cfg.ReceiveEndpoint("register-events", e =>
         {
+            e.UseRawJsonDeserializer();
             e.Bind("amq.topic", x =>
             {
                 //	KK.EVENT.CLIENT.master.SUCCESS.kwetter-frontend.REGISTER
-                x.RoutingKey = "KK.EVENT.#";
+                x.RoutingKey = "KK.EVENT.CLIENT.master.SUCCESS.kwetter-frontend.REGISTER";
                 x.ExchangeType = "topic";
                 }
             ) ;

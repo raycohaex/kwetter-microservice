@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Eventbus.Messages.Events.Integration.AuthRegistered
 {
-    public class RegisterEvent
+    public class EventClientNotificationMqMsg
     {
-        public string Username { get; set; }
+        public long Time { get; set; }
         public string UserId { get; set; }
+        public EventClientNotificationDetails Details { get; set; }
     }
 }
