@@ -25,7 +25,7 @@ namespace HomeTimeline.API.Controllers
             // Get the username from the user's claims
             var usernameClaim = user.Identity.Name;
 
-            if (user.Identity.IsAuthenticated == false)
+            if (user.Identity.IsAuthenticated == null)
             {
                 return Unauthorized();
             }

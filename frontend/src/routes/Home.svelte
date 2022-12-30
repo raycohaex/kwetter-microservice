@@ -5,18 +5,35 @@ import axios from 'axios';
 import WriteTweet from '../components/WriteTweet.svelte';
 import { onMount } from 'svelte';
 import { once } from 'svelte/internal';
+import { Router, Link, Route } from "svelte-routing";
 
-let test;
+let timeline;
+// create a promise method that waits for the keycloak token to be set
+const waitForToken = () => {
+    return new Promise((resolve, reject) => {
+        const interval = setInterval(() => {
+            if(keycloak.token) {
+                clearInterval(interval);
+                resolve();
+            }
+        }, 100);
+    });
+}
 
 onMount(async () => {
-    client.get(`tweet/08dad221-95d2-4df7-80ac-06f5f689a28e`).then(res => test = res).catch(err => console.log(err));
+    
 
-    // wait for data to be fetched then console log
+    waitForToken().then(() => {
+        client.get(`home-timeline` , {
+        headers: {
+            Authorization: `Bearer ${keycloak.token}`
+        }
+        })
+        .then(res => timeline = res)
+        .catch(err => console.log(err));
+    });
+
 });
-
-$: if (test) {
-    console.log(test);
-}
 </script>
 
 <main class="flex flex-col">
@@ -27,6 +44,25 @@ $: if (test) {
     <!-- list of tweets -->
     <div>
         <!-- make a svelte foreach that does 8 iterations -->
+        {#if timeline}
+            {#each timeline.data.kweets as kweet}
+            <div class="py-8 px-[50px] border-b border-gray-100 flex">
+                <div class="rounded-full border-8 border-white bg-slate-900 w-12 h-12 mr-4"></div>
+                <div class="flex-1">
+                <Link to={`/profile/${kweet.userName}`}>
+                    <div class="flex justify-between">
+                        <div class="font-bold text-lg">{kweet.userName}</div>
+                        <div class="text-gray-500">{kweet.date}</div>
+                    </div>
+                </Link>
+                
+                <div class="mt-2">
+                    {kweet.tweetBody}
+                </div>
+                </div>
+            </div>
+            {/each}
+        {:else}
         {#each [1,2,3,4,5,6,7,8] as tweet}
         <div class="py-8 px-[50px] border-b border-gray-100 flex">
             <div class="skeleton rounded-full w-12 h-12 mr-4"></div>
@@ -38,6 +74,7 @@ $: if (test) {
             </div>
         </div>
         {/each}
+        {/if}
     </div>
 </main>
 

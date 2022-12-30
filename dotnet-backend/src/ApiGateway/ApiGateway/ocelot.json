@@ -38,7 +38,7 @@
         }
       ],
       "UpstreamPathTemplate": "/user-timeline/{username}",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamHttpMethod": [ "GET", "OPTIONS" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
     //Social API
@@ -52,7 +52,7 @@
         }
       ],
       "UpstreamPathTemplate": "/social/follow",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
     {
@@ -65,7 +65,7 @@
         }
       ],
       "UpstreamPathTemplate": "/social/user",
-      "UpstreamHttpMethod": [ "POST" ],
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     },
     // Home timeline API
@@ -79,7 +79,7 @@
         }
       ],
       "UpstreamPathTemplate": "/home-timeline",
-      "UpstreamHttpMethod": [ "GET" ],
+      "UpstreamHttpMethod": [ "GET", "OPTIONS" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
     }
   ],

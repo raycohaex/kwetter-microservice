@@ -29,7 +29,7 @@
             withCredentials: false,
             data: {
                 tweetBody: tweetbody,
-                userName: "depr"
+                userName: "null"
             },
             headers: {
                 Authorization: `Bearer ${token}`

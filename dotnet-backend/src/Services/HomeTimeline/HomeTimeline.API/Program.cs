@@ -50,6 +50,11 @@ builder.Services.AddSwaggerGen(options => {
 }
 );
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", b => b.AllowAnyHeader().AllowAnyOrigin().AllowAnyMethod());
+});
+
 builder.Services.AddScoped<IHomeTimelineService, HomeTimelineService>();
 builder.Services.AddScoped<IHomeTimelineRepository, HomeTimelineRepository>();
 
@@ -64,6 +69,8 @@ if (app.Environment.IsDevelopment())
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseCors("AllowAll");
 
 app.MapControllers();
 
