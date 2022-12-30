@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace HomeTimeline.API.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/v1/[controller]")]
     public class HomeTimelineController : ControllerBase
     {
         private readonly ILogger<HomeTimelineController> _logger;
@@ -17,10 +17,20 @@ namespace HomeTimeline.API.Controllers
             _homeTimelineService = homeTimelineService;
         }
 
-        [HttpGet("username")]
-        public async Task<ActionResult<Timeline>> GetHomeTimelineByUsername(string username)
+        [HttpGet]
+        public async Task<ActionResult<Timeline>> GetHomeTimeline()
         {
-            var timeline = await _homeTimelineService.GetHomeTimeline(username);
+            var user = User;
+
+            // Get the username from the user's claims
+            var usernameClaim = user.Identity.Name;
+
+            if (user.Identity.IsAuthenticated == false)
+            {
+                return Unauthorized();
+            }
+
+            var timeline = await _homeTimelineService.GetHomeTimeline(usernameClaim);
 
             if (timeline == null) {
                 return NotFound();

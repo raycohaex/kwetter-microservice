@@ -4,6 +4,7 @@ using HomeTimeline.API.EventBusConsumer;
 using HomeTimeline.Application.Contracts;
 using HomeTimeline.Application.Features;
 using HomeTimeline.Infrastructure.Repositories;
+using Keycloak.AuthServices.Authentication;
 using MassTransit;
 using Microsoft.OpenApi.Models;
 
@@ -20,6 +21,8 @@ builder.Services.AddStackExchangeRedisCache(options =>
 {
     options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
 });
+
+builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
 builder.Services.AddMassTransit(config =>
 {
@@ -59,6 +62,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();

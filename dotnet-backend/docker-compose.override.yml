@@ -29,6 +29,18 @@ services:
     ports:
       - "8001:80"
 
+  api.hometimeline:
+    container_name: api.hometimeline
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - "CacheSettings:ConnectionString=cache.hometimeline:6379"
+      - "EventBusSettings:HostAddress=amqp://guest:guest@service.rabbitmq:5672"
+      - "Keycloak:auth-server-url=http://172.22.192.1:8080/auth/"
+    depends_on:
+      - service.rabbitmq
+    ports:
+      - "8004:80"
+
   api.social:
     container_name: api.social
     environment:
@@ -89,7 +101,6 @@ services:
       - "5672:5672"
       - "15672:15672"
 
-
   apigateway:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
@@ -97,4 +108,3 @@ services:
       - "80:80"
     depends_on:
       - api.kweet
-

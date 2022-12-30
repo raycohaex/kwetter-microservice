@@ -67,6 +67,20 @@
       "UpstreamPathTemplate": "/social/user",
       "UpstreamHttpMethod": [ "POST" ],
       "FileCacheOptions": { "TtlSeconds": 30 }
+    },
+    // Home timeline API
+    {
+      "DownstreamPathTemplate": "/api/v1/HomeTimeline",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "api.hometimeline",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/home-timeline",
+      "UpstreamHttpMethod": [ "GET" ],
+      "FileCacheOptions": { "TtlSeconds": 30 }
     }
   ],
   "GlobalConfiguration": {
