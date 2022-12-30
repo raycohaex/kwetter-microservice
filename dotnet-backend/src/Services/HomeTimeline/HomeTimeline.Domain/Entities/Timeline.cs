@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace HomeTimeline.Domain.Entities
 {
-    public class HomeTimeline
+    public class Timeline
     {
         public string UserName { get; set; }
-        public List<TimelineKweet> Kweets { get; set; }
+        public List<TimelineKweet> Kweets { get; set; } = new List<TimelineKweet>();
     }
 }

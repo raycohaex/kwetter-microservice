@@ -11,19 +11,33 @@ namespace HomeTimeline.Application.Features
 {
     public class HomeTimelineService: IHomeTimelineService
     {
-        public HomeTimelineService()
+        private readonly IHomeTimelineRepository _repository;
+        public HomeTimelineService(IHomeTimelineRepository repository)
         {
-
+            _repository = repository;
         }
 
-        public Task<Domain.Entities.HomeTimeline> GetHomeTimeline(string username)
+        public async Task<Timeline> GetHomeTimeline(string username)
         {
-            throw new NotImplementedException();
+            var timeline = await _repository.GetTimeline(username);
+            return timeline;
         }
 
-        public Task UpdateTimelines(List<string> followers, KweetEntity kweet)
+        public async Task UpdateTimelines(List<string> followers, KweetEntity kweet)
         {
-            throw new NotImplementedException();
+            var timelineKweet = new TimelineKweet();
+            timelineKweet.UserName = kweet.UserName;
+            timelineKweet.TweetBody = kweet.TweetBody;
+            timelineKweet.CreatedAt = kweet.CreatedOn;
+
+            foreach (var follower in followers)
+            {
+                var timeline = new Timeline();
+                timeline.UserName = follower;
+                timeline.Kweets.Add(timelineKweet);
+
+                await _repository.UpdateTimeline(timeline);
+            }
         }
     }
 }

@@ -11,6 +11,6 @@ namespace HomeTimeline.Application.Contracts
     public interface IHomeTimelineService
     {
         Task UpdateTimelines(List<string> followers, KweetEntity kweet);
-        Task<Domain.Entities.HomeTimeline> GetHomeTimeline(string username);
+        Task<Domain.Entities.Timeline> GetHomeTimeline(string username);
     }
 }

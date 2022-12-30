@@ -21,6 +21,7 @@
     <ProjectReference Include="..\..\Kweet\Kweet.Application\Kweet.Application.csproj" />
     <ProjectReference Include="..\..\Kweet\Kweet.Domain\Kweet.Domain.csproj" />
     <ProjectReference Include="..\HomeTimeline.Application\HomeTimeline.Application.csproj" />
+    <ProjectReference Include="..\HomeTimeline.Infrastructure\HomeTimeline.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

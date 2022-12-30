@@ -3,6 +3,7 @@ using Eventbus.Messages.Events.Integration.GetFollowers;
 using HomeTimeline.API.EventBusConsumer;
 using HomeTimeline.Application.Contracts;
 using HomeTimeline.Application.Features;
+using HomeTimeline.Infrastructure.Repositories;
 using MassTransit;
 using Microsoft.OpenApi.Models;
 
@@ -47,6 +48,7 @@ builder.Services.AddSwaggerGen(options => {
 );
 
 builder.Services.AddScoped<IHomeTimelineService, HomeTimelineService>();
+builder.Services.AddScoped<IHomeTimelineRepository, HomeTimelineRepository>();
 
 var app = builder.Build();
 
