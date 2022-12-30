@@ -1,6 +1,8 @@
 using Eventbus.Messages.Common;
 using Eventbus.Messages.Events.Integration.GetFollowers;
 using HomeTimeline.API.EventBusConsumer;
+using HomeTimeline.Application.Contracts;
+using HomeTimeline.Application.Features;
 using MassTransit;
 using Microsoft.OpenApi.Models;
 
@@ -12,6 +14,11 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = builder.Configuration.GetValue<string>("CacheSettings:ConnectionString");
+});
 
 builder.Services.AddMassTransit(config =>
 {
@@ -38,6 +45,8 @@ builder.Services.AddSwaggerGen(options => {
     });
 }
 );
+
+builder.Services.AddScoped<IHomeTimelineService, HomeTimelineService>();
 
 var app = builder.Build();
 

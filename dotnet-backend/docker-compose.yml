@@ -16,6 +16,11 @@ services:
     networks:
       - app
 
+  cache.hometimeline:
+    image: redis:alpine
+    networks:
+      - app
+
   db.auth:
     image: postgres:13.2
     restart: unless-stopped

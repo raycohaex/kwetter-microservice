@@ -57,7 +57,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApiGateway", "src\ApiGatewa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HomeTimeline", "HomeTimeline", "{D6B45778-7974-41A7-9859-741FBDD18756}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeTimeline.API", "src\Services\HomeTimeline\HomeTimeline.API\HomeTimeline.API.csproj", "{E317954D-0DCB-4F70-B649-1E74604F99F2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HomeTimeline.API", "src\Services\HomeTimeline\HomeTimeline.API\HomeTimeline.API.csproj", "{E317954D-0DCB-4F70-B649-1E74604F99F2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeTimeline.Application", "src\Services\HomeTimeline\HomeTimeline.Application\HomeTimeline.Application.csproj", "{0D346C45-79D6-46F8-8171-0E69BD52FA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeTimeline.Domain", "src\Services\HomeTimeline\HomeTimeline.Domain\HomeTimeline.Domain.csproj", "{CDDF0085-6878-49BA-A625-BFA42A3E2010}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HomeTimeline.Infrastructure", "src\Services\HomeTimeline\HomeTimeline.Infrastructure\HomeTimeline.Infrastructure.csproj", "{E826D2B9-55EA-499D-B93C-282FB66EC710}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -137,6 +143,18 @@ Global
 		{E317954D-0DCB-4F70-B649-1E74604F99F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E317954D-0DCB-4F70-B649-1E74604F99F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E317954D-0DCB-4F70-B649-1E74604F99F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D346C45-79D6-46F8-8171-0E69BD52FA02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D346C45-79D6-46F8-8171-0E69BD52FA02}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D346C45-79D6-46F8-8171-0E69BD52FA02}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D346C45-79D6-46F8-8171-0E69BD52FA02}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDDF0085-6878-49BA-A625-BFA42A3E2010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDDF0085-6878-49BA-A625-BFA42A3E2010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDDF0085-6878-49BA-A625-BFA42A3E2010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDDF0085-6878-49BA-A625-BFA42A3E2010}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E826D2B9-55EA-499D-B93C-282FB66EC710}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E826D2B9-55EA-499D-B93C-282FB66EC710}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E826D2B9-55EA-499D-B93C-282FB66EC710}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E826D2B9-55EA-499D-B93C-282FB66EC710}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -165,6 +183,9 @@ Global
 		{989E7F9A-4776-4E29-B0F0-5E3B9B49C0F8} = {2337A4A7-B9EF-4FF5-B929-734BE691DEF7}
 		{D6B45778-7974-41A7-9859-741FBDD18756} = {18489C93-2C5B-416E-A258-914A86F4C0E2}
 		{E317954D-0DCB-4F70-B649-1E74604F99F2} = {D6B45778-7974-41A7-9859-741FBDD18756}
+		{0D346C45-79D6-46F8-8171-0E69BD52FA02} = {D6B45778-7974-41A7-9859-741FBDD18756}
+		{CDDF0085-6878-49BA-A625-BFA42A3E2010} = {D6B45778-7974-41A7-9859-741FBDD18756}
+		{E826D2B9-55EA-499D-B93C-282FB66EC710} = {D6B45778-7974-41A7-9859-741FBDD18756}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {453852FF-C494-4E5E-844B-14EA98ED9CB6}

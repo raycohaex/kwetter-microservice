@@ -68,6 +68,12 @@ services:
     ports:
       - "6379:6379"
 
+  cache.hometimeline:
+    container_name: "cache.hometimeline"
+    restart: always
+    ports:
+      - "6380:6379"
+
   db.usertimeline:
     container_name: db.usertimeline
     restart: always

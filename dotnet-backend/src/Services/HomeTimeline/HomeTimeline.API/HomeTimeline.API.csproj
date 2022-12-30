@@ -18,7 +18,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\BuildingBlocks\Eventbus.Messages\Eventbus.Messages.csproj" />
+    <ProjectReference Include="..\..\Kweet\Kweet.Application\Kweet.Application.csproj" />
     <ProjectReference Include="..\..\Kweet\Kweet.Domain\Kweet.Domain.csproj" />
+    <ProjectReference Include="..\HomeTimeline.Application\HomeTimeline.Application.csproj" />
   </ItemGroup>
 
 </Project>
