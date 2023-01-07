@@ -11,4 +11,5 @@ workflows:
             dotnet-backend/src/Services/Kweet/.* run-kweet-workflow true
             dotnet-backend/src/BuildingBlocks/.* run-common-workflow true
             dotnet-backend/src/Services/UserTimeline/.* run-usertimeline-workflow true
+            dotnet-backend/src/Services/Auth/.* run-keycloak-workflow true
           config-path: .circleci/workflows.yml

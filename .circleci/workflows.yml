@@ -22,6 +22,9 @@ parameters:
   run-common-workflow:
     type: boolean
     default: false
+  run-keycloak-workflow:
+    type: boolean
+    default: false
 
 jobs:
   ############# 
@@ -131,6 +134,32 @@ jobs:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
 
+  ################
+  # Keycloak #
+  ################ 
+  publish-keycloak:
+    description: Publish application to registry
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: keycloak
+          path: dotnet-backend/src/Services/Auth
+          dockerfile: Dockerfile.local
+          tag: v1
+          no_output_timeout: 20m
+          registry-url: eu.gcr.io
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: keycloak
+          tag: v1
+          registry-url: eu.gcr.io
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
+
+
 workflows:
   kweetapi:
     when: << pipeline.parameters.run-kweet-workflow >>
@@ -146,8 +175,6 @@ workflows:
           filters:
             branches:
               only: main
-
-
   usertimeline:
     when: << pipeline.parameters.run-usertimeline-workflow >>
     jobs:
@@ -155,6 +182,13 @@ workflows:
       - publish-usertimeline:
           requires:
             - analyse-usertimeline
+          filters:
+            branches:
+              only: main
+  keycloak:
+    when: << pipeline.parameters.run-keycloak-workflow >>
+    jobs:
+      - publish-keycloak:
           filters:
             branches:
               only: main
