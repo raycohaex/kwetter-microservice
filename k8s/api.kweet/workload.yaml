@@ -1,0 +1,65 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "api.kweet-config-tli0"
+  namespace: "default"
+  labels:
+    app: "api.kweet"
+data:
+  EventBusSettings__HostAddress: "<REDACTED>"
+  ConnectionStrings__KweetDbConnectionString: "<REDACTED>"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "api.kweet"
+  namespace: "default"
+  labels:
+    app: "api.kweet"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "api.kweet"
+  template:
+    metadata:
+      labels:
+        app: "api.kweet"
+    spec:
+      containers:
+      - name: "kweetapi-sha256-1"
+        image: "eu.gcr.io/kwetter-365116/kweetapi@sha256:2ed88c330fb3765342be6d36c8e2a985864d07a6e433330e30852f7fea2a7265"
+        env:
+        - name: "EventBusSettings__HostAddress"
+          valueFrom:
+            configMapKeyRef:
+              key: "EventBusSettings__HostAddress"
+              name: "api.kweet-config-tli0"
+        - name: "ConnectionStrings__KweetDbConnectionString"
+          valueFrom:
+            configMapKeyRef:
+              key: "ConnectionStrings__KweetDbConnectionString"
+              name: "api.kweet-config-tli0"
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "api.kweet-hpa-w7tt"
+  namespace: "default"
+  labels:
+    app: "api.kweet"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "api.kweet"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80
