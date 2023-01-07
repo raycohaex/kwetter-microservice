@@ -12,4 +12,5 @@ workflows:
             dotnet-backend/src/BuildingBlocks/.* run-common-workflow true
             dotnet-backend/src/Services/UserTimeline/.* run-usertimeline-workflow true
             dotnet-backend/src/Services/Auth/.* run-keycloak-workflow true
+            dotnet-backend/src/Services/Social/.* run-socialapi-workflow true
           config-path: .circleci/workflows.yml

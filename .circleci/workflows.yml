@@ -25,6 +25,9 @@ parameters:
   run-keycloak-workflow:
     type: boolean
     default: false
+  run-socialapi-workflow:
+    type: boolean
+    default: false
 
 jobs:
   ############# 
@@ -134,9 +137,9 @@ jobs:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
 
-  ################
+  ############
   # Keycloak #
-  ################ 
+  ############
   publish-keycloak:
     description: Publish application to registry
     executor: gcp-gcr/default
@@ -158,7 +161,30 @@ jobs:
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
-
+  ##############
+  # Social API #
+  ##############
+  publish-socialapi:
+    description: Publish application to registry
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: socialapi
+          path: dotnet-backend/src/
+          dockerfile: Dockerfile.social
+          tag: v1
+          no_output_timeout: 20m
+          registry-url: eu.gcr.io
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: socialapi
+          tag: v1
+          registry-url: eu.gcr.io
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 
 workflows:
   kweetapi:
@@ -189,6 +215,13 @@ workflows:
     when: << pipeline.parameters.run-keycloak-workflow >>
     jobs:
       - publish-keycloak:
+          filters:
+            branches:
+              only: main
+  socialapi:
+    when: << pipeline.parameters.run-socialapi-workflow >>
+    jobs:
+      - publish-socialapi:
           filters:
             branches:
               only: main
