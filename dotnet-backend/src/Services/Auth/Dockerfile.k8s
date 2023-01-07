@@ -1,0 +1,4 @@
+FROM jboss/keycloak
+
+COPY ["dotnet-backend/src/Services/Auth/keycloak-to-rabbit-3.0.2.jar", "opt/jboss/keycloak/standalone/deployments/"]
+COPY ["dotnet-backend/src/Services/Auth/realm-export.json", "opt/jboss/keycloak/"]

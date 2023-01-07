@@ -146,7 +146,7 @@ jobs:
       - gcp-gcr/build-image:
           image: keycloak
           path: dotnet-backend/src/Services/Auth
-          dockerfile: Dockerfile.local
+          dockerfile: Dockerfile.k8s
           tag: v1
           no_output_timeout: 20m
           registry-url: eu.gcr.io
