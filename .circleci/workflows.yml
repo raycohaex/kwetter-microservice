@@ -28,6 +28,9 @@ parameters:
   run-socialapi-workflow:
     type: boolean
     default: false
+  run-hometimeline-workflow:
+    type: boolean
+    default: false
 
 jobs:
   ############# 
@@ -185,6 +188,30 @@ jobs:
       - run:
           command: |
             echo "Digest is: $(</tmp/digest.txt)"
+  ################
+  # HomeTimeline #
+  ################
+  publish-hometimeline:
+    description: Publish application to registry
+    executor: gcp-gcr/default
+    steps:
+      - checkout
+      - gcp-gcr/gcr-auth
+      - gcp-gcr/build-image:
+          image: hometimeline
+          path: dotnet-backend/src/
+          dockerfile: Dockerfile.hometimeline
+          tag: v1
+          no_output_timeout: 20m
+          registry-url: eu.gcr.io
+      - gcp-gcr/push-image:
+          digest-path: /tmp/digest.txt
+          image: hometimeline
+          tag: v1
+          registry-url: eu.gcr.io
+      - run:
+          command: |
+            echo "Digest is: $(</tmp/digest.txt)"
 
 workflows:
   kweetapi:
@@ -225,6 +252,14 @@ workflows:
           filters:
             branches:
               only: main
+  hometimeline:
+    when: << pipeline.parameters.run-hometimeline-workflow >>
+    jobs:
+      - publish-hometimeline:
+          filters:
+            branches:
+              only: main
+              
   # common:
   #   when: << pipeline.parameters.run-common-workflow >>
   #   jobs:
