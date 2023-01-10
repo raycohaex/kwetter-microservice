@@ -15,6 +15,7 @@ namespace Social.API.Controllers
             _followService = followService;
         }
 
+        // for debugging
         [HttpPost]
         [ProducesResponseType(typeof(UserDto), (int)HttpStatusCode.OK)]
         public async Task<ActionResult> CreateUser([FromBody] UserDto user)
