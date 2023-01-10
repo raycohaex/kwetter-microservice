@@ -8,12 +8,13 @@ import { Router, Link, Route } from "svelte-routing";
 let claims;
 export let username;
 let tweets = [];
+let followers = [];
 
 onMount(async () => {
     claims = keycloak.tokenParsed;
     
     client.get(`user-timeline/${username}`).then(res => tweets = res.data.items).catch(err => console.log(err));
-    console.log(tweets);
+    client.get(`social/follow/${username}`).then(res => followers = res.data).catch(err => console.log(err));
 });
     
 </script>
@@ -34,11 +35,15 @@ onMount(async () => {
                 {/if}
                 <div class="flex mt-3">
                     <div class="flex">
-                        <div class="font-bold mr-1">53</div>
+                        {#if followers['followers'] != undefined}
+                        <div class="font-bold mr-1">{followers['followers']}</div>
+                        {/if}
                         <div class="text-gray-500 text-sm">Following</div>
                     </div>
                     <div class="flex ml-4">
-                        <div class="font-bold mr-1">34</div>
+                        {#if followers['following'] != undefined}
+                        <div class="font-bold mr-1">{followers['following']}</div>
+                        {/if}
                         <div class="text-gray-500 text-sm">Following</div>
                     </div>
                 </div>

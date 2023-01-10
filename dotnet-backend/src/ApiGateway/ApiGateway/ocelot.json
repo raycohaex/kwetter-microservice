@@ -63,7 +63,7 @@
         }
       ],
       "UpstreamPathTemplate": "/social/follow/{username}",
-      "UpstreamHttpMethod": [ "POST", "OPTIONS" ]
+      "UpstreamHttpMethod": [ "GET", "OPTIONS" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/User",
