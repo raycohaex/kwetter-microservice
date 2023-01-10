@@ -30,6 +30,11 @@ namespace HomeTimeline.API.Controllers
                 return Unauthorized();
             }
 
+            if(usernameClaim == null)
+            {
+                return BadRequest();
+            }
+
             var timeline = await _homeTimelineService.GetHomeTimeline(usernameClaim);
 
             if (timeline == null) {

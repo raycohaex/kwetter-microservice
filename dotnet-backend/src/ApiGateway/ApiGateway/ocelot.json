@@ -38,8 +38,7 @@
         }
       ],
       "UpstreamPathTemplate": "/user-timeline/{username}",
-      "UpstreamHttpMethod": [ "GET", "OPTIONS" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [ "GET", "OPTIONS" ]
     },
     //Social API
     {
@@ -47,26 +46,36 @@
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.follow",
+          "Host": "api.social",
           "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/social/follow",
-      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/v1/Follow/{username}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "api.social",
+          "Port": "80"
+        }
+      ],
+      "UpstreamPathTemplate": "/social/follow/{username}",
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ]
     },
     {
       "DownstreamPathTemplate": "/api/v1/User",
       "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
-          "Host": "api.follow",
+          "Host": "api.social",
           "Port": "80"
         }
       ],
       "UpstreamPathTemplate": "/social/user",
-      "UpstreamHttpMethod": [ "POST", "OPTIONS" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [ "POST", "OPTIONS" ]
     },
     // Home timeline API
     {
@@ -79,8 +88,7 @@
         }
       ],
       "UpstreamPathTemplate": "/home-timeline",
-      "UpstreamHttpMethod": [ "GET", "OPTIONS" ],
-      "FileCacheOptions": { "TtlSeconds": 30 }
+      "UpstreamHttpMethod": [ "GET", "OPTIONS" ]
     }
   ],
   "GlobalConfiguration": {

@@ -2,6 +2,7 @@ using Eventbus.Messages.Common;
 using MassTransit;
 using MassTransit.Transports.Fabric;
 using Microsoft.OpenApi.Models;
+using Keycloak.AuthServices.Authentication;
 using Neo4jClient;
 using Social.API.EventBusConsumer;
 using Social.Application.Contracts;
@@ -27,6 +28,9 @@ var client = new BoltGraphClient(
     username,
     password
 );
+
+// add keycloak
+builder.Services.AddKeycloakAuthentication(builder.Configuration);
 
 builder.Services.AddMassTransit(config =>
 {
@@ -81,7 +85,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseAuthentication();
 app.UseAuthorization();
+
 app.UseCors("AllowAll");
 app.MapControllers();
 

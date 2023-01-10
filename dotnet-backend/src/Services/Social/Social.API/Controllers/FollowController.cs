@@ -17,8 +17,21 @@ namespace Social.API.Controllers
 
         [HttpPost]
         [ProducesResponseType(typeof(RelationDto), (int)HttpStatusCode.OK)]
-        public async Task<ActionResult> CreateRelationship([FromBody] RelationDto relation)
+        public async Task<ActionResult> CreateRelationship([FromBody] string followee)
         {
+            var user = User;
+
+            if (user.Identity == null || user.Identity.IsAuthenticated == false)
+            {
+                return Unauthorized();
+            }
+
+            var follower = user.Identity.Name;
+
+            var relation = new RelationDto();
+            relation.Followee = followee;
+            relation.Follower = follower;
+
             await _followService.CreateFollowRelation(relation);
 
             return Ok();

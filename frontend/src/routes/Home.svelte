@@ -6,6 +6,7 @@ import WriteTweet from '../components/WriteTweet.svelte';
 import { onMount } from 'svelte';
 import { once } from 'svelte/internal';
 import { Router, Link, Route } from "svelte-routing";
+import Time from 'svelte-time';
 
 let timeline;
 // create a promise method that waits for the keycloak token to be set
@@ -52,7 +53,8 @@ onMount(async () => {
                 <Link to={`/profile/${kweet.userName}`}>
                     <div class="flex justify-between">
                         <div class="font-bold text-lg">{kweet.userName}</div>
-                        <div class="text-gray-500">{kweet.date}</div>
+                        <Time relative timestamp={kweet.createdAt} />
+                        <!-- human readable day (seconds or minutes ago) -->
                     </div>
                 </Link>
                 

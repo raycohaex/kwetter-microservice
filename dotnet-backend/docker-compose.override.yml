@@ -8,7 +8,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "ConnectionStrings:KweetDbConnectionString=server=db.kweet;database=KweetDb;user=development;password=development"
       - "EventBusSettings:HostAddress=amqp://guest:guest@service.rabbitmq:5672"
-      - "Keycloak:auth-server-url=http://172.22.192.1:8080/auth/"
+      #from WSL run  cat /etc/resolv.conf
+      - "Keycloak:auth-server-url=http://172.24.0.1:8080/auth/"
 
     depends_on:
         - db.kweet
@@ -35,7 +36,8 @@ services:
       - ASPNETCORE_ENVIRONMENT=Development
       - "CacheSettings:ConnectionString=cache.hometimeline:6379"
       - "EventBusSettings:HostAddress=amqp://guest:guest@service.rabbitmq:5672"
-      - "Keycloak:auth-server-url=http://172.22.192.1:8080/auth/"
+      #from WSL run  cat /etc/resolv.conf
+      - "Keycloak:auth-server-url=http://172.24.0.1:8080/auth/"
     depends_on:
       - service.rabbitmq
     ports:
@@ -49,6 +51,8 @@ services:
       - "neo4j:username=neo4j"
       - "neo4j:password=develop"
       - "EventBusSettings:HostAddress=amqp://guest:guest@service.rabbitmq:5672"
+      #from WSL run  cat /etc/resolv.conf
+      - "Keycloak:auth-server-url=http://172.24.0.1:8080/auth/"
     ports:
       - "8002:80"
 
