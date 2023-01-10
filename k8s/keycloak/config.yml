@@ -1,0 +1,137 @@
+---
+apiVersion: "v1"
+kind: "ConfigMap"
+metadata:
+  name: "nginx-1-config-pqo8"
+  namespace: "default"
+  labels:
+    app: "nginx-1"
+data:
+  DB_VENDOR: "postgres"
+  DB_ADDR: "<REDACTED>"
+  DB_DATABASE: "keycloak"
+  DB_USER: "keycloak"
+  DB_PASSWORD: "<REDACTED>"
+  KEYCLOAK_USER: "admin"
+  KEYCLOAK_PASSWORD: "<REDACTED>"
+  KK_TO_RMQ_URL: "cow.rmq2.cloudamqp.com"
+  KK_TO_RMQ_PORT: "5672"
+  KK_TO_RMQ_VHOST: "vxfwzezo"
+  KK_TO_RMQ_EXCHANGE: "amq.topic"
+  KK_TO_RMQ_USERNAME: "vxfwzezo"
+  KK_TO_RMQ_PASSWORD: "<REDACTED>"
+  KK_TO_RMQ_USE_TLS: "true"
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "nginx-1"
+  namespace: "default"
+  labels:
+    app: "nginx-1"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "nginx-1"
+  template:
+    metadata:
+      labels:
+        app: "nginx-1"
+    spec:
+      containers:
+      - name: "keycloak-sha256-1"
+        image: "eu.gcr.io/kwetter-365116/keycloak@sha256:609bbf579f5f3d3a383313f2b52ceee2959f5be7d548ec21082e5b4a1cdfcd92"
+        env:
+        - name: "DB_VENDOR"
+          valueFrom:
+            configMapKeyRef:
+              key: "DB_VENDOR"
+              name: "nginx-1-config-pqo8"
+        - name: "DB_ADDR"
+          valueFrom:
+            configMapKeyRef:
+              key: "DB_ADDR"
+              name: "nginx-1-config-pqo8"
+        - name: "DB_DATABASE"
+          valueFrom:
+            configMapKeyRef:
+              key: "DB_DATABASE"
+              name: "nginx-1-config-pqo8"
+        - name: "DB_USER"
+          valueFrom:
+            configMapKeyRef:
+              key: "DB_USER"
+              name: "nginx-1-config-pqo8"
+        - name: "DB_PASSWORD"
+          valueFrom:
+            configMapKeyRef:
+              key: "DB_PASSWORD"
+              name: "nginx-1-config-pqo8"
+        - name: "KEYCLOAK_USER"
+          valueFrom:
+            configMapKeyRef:
+              key: "KEYCLOAK_USER"
+              name: "nginx-1-config-pqo8"
+        - name: "KEYCLOAK_PASSWORD"
+          valueFrom:
+            configMapKeyRef:
+              key: "KEYCLOAK_PASSWORD"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_URL"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_URL"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_PORT"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_PORT"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_VHOST"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_VHOST"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_EXCHANGE"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_EXCHANGE"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_USERNAME"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_USERNAME"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_PASSWORD"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_PASSWORD"
+              name: "nginx-1-config-pqo8"
+        - name: "KK_TO_RMQ_USE_TLS"
+          valueFrom:
+            configMapKeyRef:
+              key: "KK_TO_RMQ_USE_TLS"
+              name: "nginx-1-config-pqo8"
+---
+apiVersion: "autoscaling/v2"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "nginx-1-hpa-zk8c"
+  namespace: "default"
+  labels:
+    app: "nginx-1"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "nginx-1"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      target:
+        type: "Utilization"
+        averageUtilization: 80

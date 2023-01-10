@@ -52,7 +52,6 @@ services:
       KK_TO_RMQ_PASSWORD: 'guest'
       KK_TO_RMQ_USE_TLS: 'false'
       #KEYCLOAK_IMPORT: src/Services/Auth/realm-export.json
-
     image: ${DOCKER_REGISTRY-}keycloak-rabbitmq
     build:
       context: .
