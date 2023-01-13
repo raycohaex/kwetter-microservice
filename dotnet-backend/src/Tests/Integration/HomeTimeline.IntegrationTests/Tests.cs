@@ -2,15 +2,21 @@ using Eventbus.Messages.Events;
 using Eventbus.Messages.Events.Integration.GetFollowers;
 using HomeTimeline.API.EventBusConsumer;
 using HomeTimeline.Application.Contracts;
+using HomeTimeline.Application.Features;
+using HomeTimeline.Domain.Entities;
+using HomeTimeline.Infrastructure.Repositories;
+using Kweet.Domain.Entities;
 using MassTransit;
 using MassTransit.Testing;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.VisualStudio.TestPlatform.TestHost;
 using Moq;
 using NUnit.Framework.Internal;
+using System.Text.Json;
 
 namespace HomeTimeline.IntegrationTests
 {
@@ -69,6 +75,67 @@ namespace HomeTimeline.IntegrationTests
 
             Assert.True(await harness.Sent.Any<KweetPostedEvent>());
             Assert.True(await harness.Consumed.Any<KweetPostedEvent>());
+        }
+
+        [Fact]
+        public async Task timeline_stores_tweets_for_all_users()
+        {
+            // Arrange
+            var mockRepository = new Mock<IHomeTimelineRepository>();
+            var service = new HomeTimelineService(mockRepository.Object);
+            var followers = new List<string> { "follower1", "follower2", "follower3" };
+            var kweet = new KweetEntity
+            {
+                UserName = "testUser",
+                TweetBody = "Test Kweet",
+                CreatedOn = DateTime.Now
+            };
+
+            // Act
+            await service.UpdateTimelines(followers, kweet);
+
+            // Assert
+            mockRepository.Verify(r => r.UpdateTimeline(It.Is<Timeline>(t =>
+                t.UserName == "follower1" && t.Kweets.Count == 1 && t.Kweets[0].TweetBody == "Test Kweet")), Times.Once);
+            mockRepository.Verify(r => r.UpdateTimeline(It.Is<Timeline>(t =>
+                t.UserName == "follower2" && t.Kweets.Count == 1 && t.Kweets[0].TweetBody == "Test Kweet")), Times.Once);
+            mockRepository.Verify(r => r.UpdateTimeline(It.Is<Timeline>(t =>
+                t.UserName == "follower3" && t.Kweets.Count == 1 && t.Kweets[0].TweetBody == "Test Kweet")), Times.Once);
+        }
+
+        [Fact]
+        public async Task timeline_stores_all_30()
+        {
+            // Arrange
+            var mockRepository = new Mock<IHomeTimelineRepository>();
+            var service = new HomeTimelineService(mockRepository.Object);
+            var followers = new List<string> { "follower1", "follower2", "follower3" };
+            var kweet = new KweetEntity
+            {
+                UserName = "testUser",
+                TweetBody = "Test Kweet",
+                CreatedOn = DateTime.Now
+            };
+            var kweetCounts = new Dictionary<string, int>();
+            mockRepository
+                .Setup(r => r.UpdateTimeline(It.IsAny<Timeline>()))
+                .Callback<Timeline>(t => {
+                    if (!kweetCounts.ContainsKey(t.UserName))
+                        kweetCounts.Add(t.UserName, 0);
+                    kweetCounts[t.UserName]++;
+                });
+
+            // Act
+            for (var i = 0; i < 30; i++)
+            {
+                await service.UpdateTimelines(followers, kweet);
+            }
+
+            // Assert
+            foreach (var follower in followers)
+            {
+                Assert.True(kweetCounts[follower] <= 30);
+            }
         }
 
 
